@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unggul Nusantara Sport</title>
+
+    <!-- Favicon / title image -->
+    <link rel="icon" href="{{ asset('assets/landing-page/UNSEO B.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('assets/landing-page/UNSEO B.png') }}">
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -23,11 +28,14 @@
 
             <!-- Desktop nav -->
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="#beranda" class="hover:text-gray-200">Beranda</a>
-                <a href="#fitur" class="hover:text-gray-200">Kejuaraan</a>
-                <a href="#daftar" class="hover:text-gray-200">Tentang Kami</a>
-                <a href="#daftar"
-                    class="ml-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:opacity-90">Masuk</a>
+                <a href="{{url('/')}}" class="hover:text-gray-200">Beranda</a>
+                <a href="{{url('/kejuaraan')}}" class="hover:text-gray-200">Kejuaraan</a>
+                <a href="{{url('/tentang-kami')}}" class="hover:text-gray-200">Tentang Kami</a>
+                @guest
+                    <a href="{{ route('login') }}" class="ml-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:opacity-90">Masuk</a>
+                @else
+                    <a href="{{ route('dashboard') }}" class="ml-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:opacity-90">Dashboard</a>
+                @endguest
             </nav>
 
             <!-- Mobile menu button -->
