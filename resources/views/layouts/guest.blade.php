@@ -10,7 +10,7 @@
     <link rel="icon" href="{{ asset('assets/landing-page/UNSEO B.png') }}" type="image/png">
     <link rel="apple-touch-icon" href="{{ asset('assets/landing-page/UNSEO B.png') }}">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('assets/landing-page/tailwind.css') }}"></script>
 </head>
 
 <body class="bg-white text-gray-800">

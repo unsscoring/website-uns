@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <a href="#" class="inline-flex items-center justify-center w-full px-4 py-2 rounded-lg border border-red-100 bg-white text-sm text-gray-700 hover:shadow transition">
+                        <a href="{{url('/oauth/google')}}" class="inline-flex items-center justify-center w-full px-4 py-2 rounded-lg border border-red-100 bg-white text-sm text-gray-700 hover:shadow transition">
                             <!-- simple Google icon -->
                             <svg class="w-5 h-5 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21 12.23c0-.72-.06-1.41-.17-2.07H12v3.92h4.84c-.21 1.12-.86 2.07-1.83 2.71v2.26h2.95c1.73-1.59 2.73-3.94 2.73-6.82z" fill="#4285F4"/>
