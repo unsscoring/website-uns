@@ -1,10 +1,9 @@
 <?php
 
+use App\Livewire\Guest\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomeController::class)->name('welcome');
 
 Route::middleware([
     'auth:sanctum',
