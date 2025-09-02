@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Kontingen extends Model
 {
     protected $guarded = [];
+
+    public function atlets()
+    {
+        return $this->hasMany(Atlet::class, 'kontingens_id', 'id');
+    }
 }

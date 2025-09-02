@@ -68,4 +68,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function kontingens()
+    {
+        return $this->hasMany(Kontingen::class, 'users_id', 'id');
+    }
 }

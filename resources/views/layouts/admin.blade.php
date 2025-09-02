@@ -114,18 +114,6 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                         <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
                                             class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
                                             <li>
-                                                <a href="{{ url('/manajer/dashboard') }}" class="menu-dropdown-item group"
-                                                    :class="'menu-dropdown-item-{{ $dashboardManajer ?? 'inactive' }}'">
-                                                    Dashboard
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="overflow-hidden transform translate"
-                                        :class="(selected === 'Dashboard') ? 'block' : 'hidden'">
-                                        <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
-                                            class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
-                                            <li>
                                                 <a href="{{ url('/manajer/kontingen') }}" class="menu-dropdown-item group"
                                                     :class="'menu-dropdown-item-{{ $manajemenKontingen ?? 'inactive' }}'">
                                                     Kejuaraan
@@ -133,43 +121,45 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="overflow-hidden transform translate"
-                                        :class="(selected === 'Dashboard') ? 'block' : 'hidden'">
-                                        <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
-                                            class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
-                                            <li>
-                                                <a href="{{ url('/manajer/atlet') }}" class="menu-dropdown-item group"
-                                                    :class="'menu-dropdown-item-{{ $manajemenAtlet ?? 'inactive' }}'">
-                                                    Manajemen Kontingen
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="overflow-hidden transform translate"
-                                        :class="(selected === 'Dashboard') ? 'block' : 'hidden'">
-                                        <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
-                                            class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
-                                            <li>
-                                                <a href="{{ url('/manajer/atlet') }}" class="menu-dropdown-item group"
-                                                    :class="'menu-dropdown-item-{{ $manajemenAtlet ?? 'inactive' }}'">
-                                                    Manajemen Atlet
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="overflow-hidden transform translate"
-                                        :class="(selected === 'Dashboard') ? 'block' : 'hidden'">
-                                        <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
-                                            class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
-                                            <li>
-                                                <a href="{{ url('/manajer/pembayaran') }}"
-                                                    class="menu-dropdown-item group"
-                                                    :class="'menu-dropdown-item-{{ $manajemenPembayaran ?? 'inactive' }}'">
-                                                    Pembayaran
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    @isset($kejuaraanSelected)
+                                        <div class="overflow-hidden transform translate"
+                                            :class="(selected === 'Dashboard') ? 'block' : 'hidden'">
+                                            <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
+                                                class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
+                                                <li>
+                                                    <a href="{{ url('/manajer/atlet') }}" class="menu-dropdown-item group"
+                                                        :class="'menu-dropdown-item-{{ $manajemenAtlet ?? 'inactive' }}'">
+                                                        Manajemen Kontingen
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="overflow-hidden transform translate"
+                                            :class="(selected === 'Dashboard') ? 'block' : 'hidden'">
+                                            <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
+                                                class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
+                                                <li>
+                                                    <a href="{{ url('/manajer/atlet') }}" class="menu-dropdown-item group"
+                                                        :class="'menu-dropdown-item-{{ $manajemenAtlet ?? 'inactive' }}'">
+                                                        Manajemen Atlet
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="overflow-hidden transform translate"
+                                            :class="(selected === 'Dashboard') ? 'block' : 'hidden'">
+                                            <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
+                                                class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
+                                                <li>
+                                                    <a href="{{ url('/manajer/pembayaran') }}"
+                                                        class="menu-dropdown-item group"
+                                                        :class="'menu-dropdown-item-{{ $manajemenPembayaran ?? 'inactive' }}'">
+                                                        Pembayaran
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endisset
                                     <!-- Dropdown Menu End -->
                                 </li>
                                 <!-- Menu Item Dashboard -->
