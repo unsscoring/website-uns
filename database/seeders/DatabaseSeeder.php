@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RefGolonganSeeder::class);
         $this->call(RefRegulasiSeeder::class);
         $this->call(RefKategoriSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
