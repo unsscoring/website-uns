@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kejuaraan');
             $table->string('slug')->unique();
+            $table->string('penyelenggara');
             $table->boolean('open_pendaftaran')->default(true); 
+            $table->boolean('active')->default(true); 
             $table->longText('deskripsi');
             $table->string('poster')->nullable();
             $table->string('logo')->nullable();
