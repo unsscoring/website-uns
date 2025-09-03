@@ -7,4 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Kejuaraan extends Model
 {
     protected $guarded = [];
+
+    public function kejuaraanUnduhans()
+    {
+        return $this->hasMany(KejuaraanUnduhan::class, 'kejuaraans_id', 'id');
+    }
+    public function kejuaraanBerkass()
+    {
+        return $this->hasMany(KejuaraanBerkas::class, 'kejuaraans_id', 'id');
+    }
 }
