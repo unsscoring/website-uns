@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Illuminate\Support\Str;
 
 class SuperadminKejuaraanUpdateInformasi extends Component
 {
@@ -45,7 +46,7 @@ class SuperadminKejuaraanUpdateInformasi extends Component
         $this->cp2_no = $kejuaraan->cp2_no;
         $this->cp3_nama = $kejuaraan->cp3_nama;
         $this->cp3_no = $kejuaraan->cp3_no;
-        
+
         $expiration = Carbon::now()->addMinutes(5); // URL berlaku selama 5 menit
         $this->posterUrl = $this->kejuaraan->poster ? Storage::disk('s3')->temporaryUrl($this->kejuaraan->poster, $expiration) : null;
     }
@@ -55,6 +56,10 @@ class SuperadminKejuaraanUpdateInformasi extends Component
         return view('livewire.superadmin.superadmin-kejuaraan-update.superadmin-kejuaraan-update-informasi')->layoutData(['superadminKejuaraan' => 'active']);
     }
 
+    public function ubahNamaKejuaraan()
+    {
+        $this->slug = Str::slug($this->nama_kejuaraan);
+    }
     public function updateInformasi()
     {
         $this->isSubmitting = true;

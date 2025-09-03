@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GuestController;
 use App\Livewire\Guest\HomeController;
+use App\Livewire\Guest\KejuaraanDetail;
 use App\Livewire\Manajer\ManajerDashboard;
 use App\Livewire\Superadmin\SuperadminDashboard;
 use App\Livewire\Superadmin\SuperadminKejuaraan;
@@ -13,6 +14,7 @@ use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateL
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('welcome');
+Route::get('/kejuaraan/{slug}', KejuaraanDetail::class)->name('kejuaraan-detail');
 Route::middleware(['role:manajer'])->group(function () {
     Route::get('/manajer/dashboard', ManajerDashboard::class)->name('manajer.dashboard');
 });
