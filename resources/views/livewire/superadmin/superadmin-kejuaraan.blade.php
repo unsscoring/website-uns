@@ -149,7 +149,7 @@
                                             </td>
                                             <td class="px-5 py-4 sm:px-6">
                                                 <div class="flex items-center">
-                                                    <a href="{{ url('/superadmin/kejuaraan-edit/' . $kejuaraan->id) }}"
+                                                    <a href="{{ url('/superadmin/kejuaraan-update/' . $kejuaraan->id.'/informasi') }}"
                                                         class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-100 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
                                                         <svg class="fill-current" width="18" height="18"
                                                             viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
