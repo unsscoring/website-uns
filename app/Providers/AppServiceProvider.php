@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
 
         // Pastikan default collation sesuai server
         Schema::defaultStringLength(191);
-        Schema::defaultMorphKeyType('string');
+        Schema::defaultMorphKeyType('uuid'); // atau 'int' / 'ulid'
     }
 }
