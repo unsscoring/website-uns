@@ -20,6 +20,8 @@ class RefKategoriSeeder extends Seeder
             'pra usia dini' => [
                 'pemasalan' => [
                     'tanding' => [
+                        'FBAPA' => 'kelas bebas bawah putra',
+                        'FBAPI' => 'kelas bebas bawah putri',
                         'FKAPA' => 'kelas A putra',
                         'FKAPI' => 'kelas A putri',
                         'FKBPA' => 'kelas B putra',
@@ -36,6 +38,16 @@ class RefKategoriSeeder extends Seeder
                         'FKGPI' => 'kelas G putri',
                         'FKHPA' => 'kelas H putra',
                         'FKHPI' => 'kelas H putri',
+                        'FKIPA' => 'kelas I putra',
+                        'FKIPI' => 'kelas I putri',
+                        'FKJPA' => 'kelas J putra',
+                        'FKJPI' => 'kelas J putri',
+                        'FKKPA' => 'kelas K putra',
+                        'FKKPI' => 'kelas K putri',
+                        'FKLPA' => 'kelas L putra',
+                        'FKLPI' => 'kelas L putri',
+                        'FBAPA' => 'kelas bebas atas putra',
+                        'FBAPI' => 'kelas bebas atas putri',
                     ],
                     'seni' => [
                         'TTKPA' => 'tunggal tangan kosong putra',
