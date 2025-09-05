@@ -29,7 +29,7 @@
                 <div class="border-b border-gray-200 dark:border-gray-800">
                     <nav
                         class="-mb-px flex space-x-2 overflow-x-auto [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-200 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600 dark:[&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:h-1.5">
-                        <a href="{{ url('/superadmin/kejuaraan-update/' . $kejuaraan->id . '/informasi') }}"
+                        <a href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/kontingen') }}"
                             style="border-bottom: 2px solid #1D4ED8; color: #1D4ED8;"
                             class="tab-btn inline-flex items-center gap-2 border-b-2 px-2.5 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-brand-500 border-brand-500 dark:text-brand-400 dark:border-brand-400">
                             <svg class="size-5" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -40,7 +40,7 @@
                             </svg>
                             Kontingen
                         </a>
-                        <a href="{{ url('/superadmin/kejuaraan-update/' . $kejuaraan->id . '/kategori') }}"
+                        <a href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/atlet') }}"
                             class="tab-btn inline-flex items-center gap-2 border-b-2 px-2.5 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-gray-500 border-transparent hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                             <svg class="size-5" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@
                             Atlet
                         </a>
 
-                        <a href="{{ url('/superadmin/kejuaraan-update/' . $kejuaraan->id . '/lampiran') }}"
+                        <a href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/pembayaran') }}"
                             class="tab-btn inline-flex items-center gap-2 border-b-2 px-2.5 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-gray-500 border-transparent hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20"
                                 height="20" stroke-width="1.5" stroke="currentColor" class="size-6">

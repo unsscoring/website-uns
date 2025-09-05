@@ -470,12 +470,12 @@
                                         Simpan Poster
                                     </button>
 
-                                    @if (!empty($kejuaraan->poster))
+                                    {{-- @if (!empty($kejuaraan->poster))
                                         <button wire:click.prevent="removePoster" type="button"
                                             class="inline-flex items-center justify-center rounded-md border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
                                             Hapus Poster
                                         </button>
-                                    @endif
+                                    @endif --}}
                                 </div>
 
                                 <div wire:loading wire:target="poster" class="mt-2 text-sm text-gray-500">
