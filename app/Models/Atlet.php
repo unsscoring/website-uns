@@ -15,6 +15,6 @@ class Atlet extends Model
 
     public function refStatus()
     {
-        return $this->hasOne(refStatus::class, 'id', 'status');
+        return $this->hasOne(RefStatus::class, 'id', 'status');
     }
 }
