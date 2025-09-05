@@ -16,4 +16,9 @@ class Kejuaraan extends Model
     {
         return $this->hasMany(KejuaraanBerkas::class, 'kejuaraans_id', 'id');
     }
+    public function kejuaraanKategoris()
+    {
+        return $this->hasMany(KejuaraanKategori::class, 'kejuaraans_id', 'id');
+    }
+    
 }
