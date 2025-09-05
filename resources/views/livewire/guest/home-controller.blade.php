@@ -131,7 +131,7 @@
                         <div class="flex-shrink-0 w-full flex items-center justify-around space-x-6 px-6">
                             <img src="{{ asset('assets\landing-page\resource\jateng.webp') }}" alt="Partner 5"
                                 class="h-16 md:h-20 object-contain">
-                            <img src="{{ asset('assets\landing-page\resource\jatim.Webp') }}    " alt="Partner 6"
+                            <img src="{{ asset('assets\landing-page\resource\jatim.webp') }}    " alt="Partner 6"
                                 class="h-16 md:h-20 object-contain">
                             <img src="{{ asset('assets\landing-page\resource\tapaksuci.webp') }}" alt="Partner 7"
                                 class="h-16 md:h-20 object-contain">
