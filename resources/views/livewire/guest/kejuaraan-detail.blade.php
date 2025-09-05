@@ -126,7 +126,7 @@
                                 </ul>
                             @else
                                 @foreach ($kejuaraanKategoris as $regulasi => $golongans)
-                                    <h2 class="text-xl font-bold">{{ $regulasi }}</h2>
+                                    {{-- <h2 class="text-xl font-bold">{{ $regulasi }}</h2> --}}
 
                                     @foreach ($golongans as $golongan => $listKategori)
                                         <h3 class="ml-4 text-lg font-semibold">{{ $golongan }}</h3>
@@ -198,7 +198,7 @@
                     @endif
 
                     <div class="mt-4">
-                        <a href="{{ url('/manajer/kejuaraan/'.$kejuaraan->id) }}"
+                        <a href="{{ url('/manajer/kejuaraan/'.$kejuaraan->id.'/kontingen') }}"
                             class="w-full inline-flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm font-medium">
                             Daftar
                         </a>

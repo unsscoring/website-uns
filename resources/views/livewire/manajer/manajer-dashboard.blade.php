@@ -22,17 +22,10 @@
                                     {{ $kontingens->count() }}
                                 </h4>
                             </div>
-                            {{-- @if ($atlets->count() == 0)
-                                <a href="{{ url('/manajer/kontingen') }}"
-                                    class="p-3 text-sm font-medium text-white transition-colors rounded-lg bg-brand-500 hover:bg-brand-600">
-                                    Kelola
-                                </a>
-                            @else
-                                <a href="{{ url('/manajer/atlet') }}"
-                                    class="p-3 text-sm font-medium text-white transition-colors rounded-lg bg-brand-500 hover:bg-brand-600">
-                                    Kelola
-                                </a>
-                            @endif --}}
+                            <a href="{{ url('/manajer/kejuaraan') }}"
+                                class="p-3 text-sm font-medium text-white transition-colors rounded-lg bg-brand-500 hover:bg-brand-600">
+                                Kelola
+                            </a>
                         </div>
                     </div>
                     <div

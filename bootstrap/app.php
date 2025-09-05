@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -20,18 +22,27 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
-        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
-            // Kalau user belum login
-            if (!auth()->check()) {
-                // simpan intended url untuk redirect setelah login
-                session(['url.intended' => $request->fullUrl()]);
+        // Tangani kasus belum login (401)
+        $exceptions->render(function (AuthenticationException $e, Request $request) {
+            session(['url.intended' => $request->fullUrl()]);
+            return redirect()->route('login');
+        });
 
-                // arahkan ke login
+        // Tangani 403 yang muncul saat user belum login
+        $exceptions->render(function (HttpException $e, Request $request) {
+            if ($e->getStatusCode() === 403 && !auth()->check()) {
+                session(['url.intended' => $request->fullUrl()]);
                 return redirect()->route('login');
             }
+        });
 
-            // Kalau user sudah login, tetap tampilkan 404 normal
+        // Tangani 404
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            if (!auth()->check()) {
+                session(['url.intended' => $request->fullUrl()]);
+                return redirect()->route('login');
+            }
             return response()->view('errors.404', [], 404);
         });
-    })->create();
+    })
+    ->create();

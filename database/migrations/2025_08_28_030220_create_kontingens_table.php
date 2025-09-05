@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('kejuaraans_id');
+            $table->string('nama_penanggung_jawab');
+            $table->string('nama_wa_penanggung_jawab');
             $table->string('nama_kontingen');
+            $table->string('alamat_kontingen');
             $table->longText('data_tambahan')->nullable();
             $table->unsignedBigInteger('status');
             $table->unsignedBigInteger('total_pembayaran')->nullable();

@@ -66,7 +66,7 @@ class SuperadminKejuaraanCreate extends Component
             'title' => 'Berhasil!',
             'text' => 'Data berhasil disimpan.',
             'icon' => 'success',
-            'redirect' => '/superadmin/kejuaraan-update/' . $kejuaraan->id,
+            'redirect' => '/superadmin/kejuaraan-update/' . $kejuaraan->id.'/informasi',
         ]);
     }
 }

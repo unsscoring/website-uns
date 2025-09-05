@@ -4,6 +4,8 @@ use App\Http\Controllers\GuestController;
 use App\Livewire\Guest\HomeController;
 use App\Livewire\Guest\KejuaraanDetail;
 use App\Livewire\Manajer\ManajerDashboard;
+use App\Livewire\Manajer\ManajerKejuaraan;
+use App\Livewire\Manajer\ManajerKejuaraan\ManajerKejuaraanKontingen;
 use App\Livewire\Superadmin\SuperadminDashboard;
 use App\Livewire\Superadmin\SuperadminKejuaraan;
 use App\Livewire\Superadmin\SuperadminKejuaraanCreate;
@@ -17,6 +19,8 @@ Route::get('/', HomeController::class)->name('welcome');
 Route::get('/kejuaraan/{slug}', KejuaraanDetail::class)->name('kejuaraan-detail');
 Route::middleware(['role:manajer'])->group(function () {
     Route::get('/manajer/dashboard', ManajerDashboard::class)->name('manajer.dashboard');
+    Route::get('/manajer/kejuaraan', ManajerKejuaraan::class)->name('manajer.kejuaraan');
+    Route::get('/manajer/kejuaraan/{kejuaraan}/kontingen', ManajerKejuaraanKontingen::class)->name('manajer.kejuaraan.kontingen');
 });
 Route::middleware(['role:superadmin'])->group(function () {
     Route::get('/superadmin/dashboard', SuperadminDashboard::class)->name('superadmin.dashboard');

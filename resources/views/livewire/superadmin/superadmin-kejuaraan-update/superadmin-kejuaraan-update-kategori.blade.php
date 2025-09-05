@@ -326,7 +326,7 @@
                                         @if ($modalStatus == 'bulkKategori')
                                             <div
                                                 class="mt-2 max-h-40 overflow-y-auto rounded border border-gray-200 p-2 dark:border-gray-700">
-                                                @forelse ($refKategoris as $refKategoris)
+                                                @forelse ($refKategoris as $refKategori)
                                                     <label
                                                         class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-1">
                                                         <input type="checkbox" wire:model.defer="bulkKategorisId"

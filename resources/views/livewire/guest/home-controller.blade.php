@@ -31,7 +31,7 @@
                         <div
                             class="group block bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-[1.01] transition h-full">
                             <div class="w-full h-96 md:h-[32rem] overflow-hidden">
-                                <img src="{{ $kejuaraan->poster ? Storage::disk('s3')->temporaryUrl($kejuaraan->poster, \Carbon\Carbon::now()->addMinutes(5)) : null }} "
+                                <img loading="lazy" src="{{ $kejuaraan->poster ? Storage::disk('s3')->temporaryUrl($kejuaraan->poster, \Carbon\Carbon::now()->addMinutes(5)) : null }} "
                                     alt="Event sepak bola" class="w-full h-full object-cover">
                             </div>
                             <div class="p-5 text-left flex flex-col justify-between h-auto">
