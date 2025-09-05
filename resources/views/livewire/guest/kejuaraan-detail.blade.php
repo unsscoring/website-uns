@@ -178,7 +178,7 @@
                 <div class="bg-white rounded-lg shadow-sm p-4">
                     <h5 class="text-lg font-semibold mb-2">Informasi Singkat</h5>
                     <p class="text-sm text-gray-700"><span class="font-medium">Penyelenggara:</span>
-                        {{ $kejuaraan->Penyelenggara }}</p>
+                        {{ $kejuaraan->penyelenggara }}</p>
                     <p class="text-sm text-gray-700"><span class="font-medium">SWO:</span>
                         {{ $kejuaraan->swo ? 'Rp ' . number_format($kejuaraan->swo, 0, ',', '.') : 'Gratis' }}</p>
                     @if ($kejuaraan->cp1_no && $kejuaraan->cp1_nama)
