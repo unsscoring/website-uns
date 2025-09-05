@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('status');
             $table->unsignedBigInteger('total_pembayaran')->nullable();
             $table->string('path_pembayaran')->nullable();
+            $table->timestamp('tanggal_pembayaran')->nullable();
             $table->unsignedBigInteger('status_pembayaran')->nullable();
             $table->string('catatan_pembayaran')->nullable();
             $table->timestamps();

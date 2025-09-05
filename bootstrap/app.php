@@ -42,7 +42,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 session(['url.intended' => $request->fullUrl()]);
                 return redirect()->route('login');
             }
-            return response()->view('errors.404', [], 404);
         });
     })
     ->create();

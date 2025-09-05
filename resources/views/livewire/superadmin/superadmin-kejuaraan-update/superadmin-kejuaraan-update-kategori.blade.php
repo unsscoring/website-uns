@@ -356,7 +356,7 @@
                                         @elseif ($modalStatus == 'updateKategori')
                                             <select wire:model="kategorisId" disabled
                                                 class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">
-                                                <option value="{{$kategorisId}}">{{$kategoriSelected->refKategori->nama_kategori}} - {{$kategoriSelected->refKategori->refGolongan->nama}} ({{$kategoriSelected->refKategori->refRegulasi->nama}})</option>
+                                                <option value="{{$kategorisId}}">{{$kategoriSelected->refKategori->nama_kategori}} - {{$kategoriSelected->refKategori->refGolongan->nama}} ({{$kategoriSelected->refKategori->jenis}})</option>
                                             </select>
                                         @endif
                                     </div>

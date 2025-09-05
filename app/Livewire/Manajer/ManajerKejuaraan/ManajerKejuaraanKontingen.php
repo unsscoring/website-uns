@@ -66,7 +66,7 @@ class ManajerKejuaraanKontingen extends Component
                 'users_id' => $this->user->id,
                 'kejuaraans_id' => $this->kejuaraan->id,
                 'nama_penanggung_jawab' => $this->name,
-                'nama_wa_penanggung_jawab' => $this->no_wa,
+                'no_wa_penanggung_jawab' => $this->no_wa,
                 'nama_kontingen' => $this->nama_kontingen,
                 'alamat_kontingen' => $this->alamat_kontingen,
                 'status' => 1, // Status: Pending

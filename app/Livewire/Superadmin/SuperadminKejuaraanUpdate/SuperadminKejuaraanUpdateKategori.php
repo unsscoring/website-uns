@@ -243,7 +243,7 @@ class SuperadminKejuaraanUpdateKategori extends Component
                     'nama_kategori' => $kategori->nama_kategori,
                     'golongan' => $kategori->refGolongan->nama ?? null,
                     'regulasi' => $kategori->refRegulasi->nama ?? null,
-                    'jenis' => $kategori->refRegulasi->jenis ?? null,
+                    'jenis' => $kategori->jenis ?? null,
                 ];
             })
             ->toArray();

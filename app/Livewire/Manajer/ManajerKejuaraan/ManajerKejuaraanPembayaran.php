@@ -27,12 +27,11 @@ class ManajerKejuaraanPembayaran extends Component
         $this->jumlah_tagihan = 0;
         $this->jumlah_bayar = 0;
         $this->tanggal = Carbon::now()->format('Y-m-d');
-        $this->pembayaran = $this->user->pembayaran;
-        $this->jumlah_bayar = $this->pembayaran ? $this->pembayaran->jumlah_bayar : 0;
-        $this->tanggal = $this->pembayaran ? Carbon::parse($this->pembayaran->tanggal)->format('Y-m-d') : Carbon::now()->format('Y-m-d');
+        $this->jumlah_bayar = $this->kontingen->total_pembayaran;
+        $this->tanggal = $this->kontingen->tanggal_pembayaran ? Carbon::parse($this->kontingen->tanggal_pembayaran)->format('Y-m-d') : Carbon::now()->format('Y-m-d');
         // $this->statusPembayaran = $this->pembayaran ? $this->pembayaran->status : 0;
         $expiration = Carbon::now()->addMinutes(5); // URL berlaku selama 5 menit
-        $this->fileUrl = $this->pembayaran ? Storage::disk('s3')->temporaryUrl($this->pembayaran->file_path, $expiration) : null;
+        $this->fileUrl =$this->kontingen->path_pembayaran ? Storage::disk('s3')->temporaryUrl($this->kontingen->path_pembayaran, $expiration) : null;
         $tanding = $this->kontingen->atlets->filter(function ($atlet) {
             return strtolower($atlet->refKategori->cabang ?? '') === 'tanding';
         })->count();
@@ -68,5 +67,79 @@ class ManajerKejuaraanPembayaran extends Component
     public function render()
     {
         return view('livewire.manajer.manajer-kejuaraan.manajer-kejuaraan-pembayaran')->layoutData(['manajerKejuaraan' => 'active']);
+    }
+
+    
+    public function simpanPembayaran()
+    {
+        if ($this->isSubmitting) return;
+
+        $this->isSubmitting = true;
+        try {
+            $this->validate([
+                'jumlah_bayar' => 'required|numeric|min:0|',
+                'tanggal' => 'required|date',
+            ]);
+            if ($this->pembayaran == null) {
+                $this->validate([
+                    'bukti_pembayaran' => 'required|image|max:1024', // Maksimal 1MB
+                ]);
+            } else {
+                $this->validate([
+                    'bukti_pembayaran' => 'nullable|image|max:1024', // Maksimal 1MB
+                ]);
+            }
+        } catch (\Throwable $th) {
+            $this->dispatch('swal', [
+                'title' => 'Warning!',
+                'text' => $th->getMessage(),
+                'icon' => 'warning',
+            ]);
+            $this->validate([
+                'jumlah_bayar' => 'required|numeric|min:0|',
+                'tanggal' => 'required|date',
+            ]);
+            if ($this->pembayaran == null) {
+                $this->validate([
+                    'bukti_pembayaran' => 'required|image|max:1024', // Maksimal 1MB
+                ]);
+            } else {
+                $this->validate([
+                    'bukti_pembayaran' => 'nullable|image|max:1024', // Maksimal 1MB
+                ]);
+            }
+        }
+        
+        if ($this->bukti_pembayaran) {
+            $ekstensi = $this->bukti_pembayaran->getClientOriginalExtension();
+            $file_path = 'kontingen/bukti_bayar';
+            $file_name = Carbon::now()->timestamp . '.' . $ekstensi;
+            Storage::disk('s3')->putFileAs($file_path, $this->bukti_pembayaran, $file_name);
+            $buktiPath = $file_path . '/' . $file_name;
+        }
+
+        if ($this->pembayaran) {
+            $this->kontingen->update([
+                'total_pembayaran' => $this->jumlah_bayar,
+                'tanggal_pembayaran' => $this->tanggal,
+                'status_pembayaran' => 1, // Status terverifikasi
+                'path_pembayaran' => $buktiPath,
+            ]);
+        }
+        $this->kontingen->update([
+            'total_pembayaran' => $this->jumlah_bayar,
+            'tanggal_pembayaran' => $this->tanggal,
+            'status' => 1, // Status terverifikasi
+            'path_pembayaran' => $buktiPath,
+        ]);
+
+        $this->isSubmitting = false;
+
+        $this->dispatch('swal', [
+            'title' => 'Berhasil!',
+            'text' => 'Data berhasil disimpan.',
+            'icon' => 'success',
+            'redirect' => '/manajer/kejuaraan/' . $this->kejuaraan->id . '/pembayaran',
+        ]);
     }
 }
