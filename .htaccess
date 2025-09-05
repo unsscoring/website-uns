@@ -1,0 +1,12 @@
+Options +SymLinksIfOwnerMatch
+RewriteEngine On
+    
+RewriteRule ^$ public/ [L]
+RewriteRule (.*) public/$1 [L]
+
+
+# Allow Installatron requests
+RewriteCond %{REQUEST_FILENAME} deleteme\.\w+\.php
+RewriteRule (.*) - [L] 
+
+RewriteRule ^ index.php [L]
