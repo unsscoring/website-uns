@@ -124,6 +124,13 @@
                                         <th class="px-5 py-3 sm:px-6">
                                             <div class="flex items-center">
                                                 <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                                    Jenis
+                                                </p>
+                                            </div>
+                                        </th>
+                                        <th class="px-5 py-3 sm:px-6">
+                                            <div class="flex items-center">
+                                                <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                                     Status
                                                 </p>
                                             </div>
@@ -160,6 +167,13 @@
                                                 <div class="flex items-center">
                                                     <p class="text-gray-500 text-theme-sm dark:text-gray-400">
                                                         {{ $atlet->refKategori->nama_kategori }}
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td class="px-5 py-4 sm:px-6">
+                                                <div class="flex items-center">
+                                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                                        {{ $atlet->refKategori->jenis }}
                                                     </p>
                                                 </div>
                                             </td>
@@ -359,10 +373,10 @@
                                                     class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
                                                     Select
                                                 </option>
-                                                @foreach ($kategoriSelect as $kategori_id => $item)
-                                                    <option value="{{ $kategori_id }}"
+                                                @foreach ($kategoriSelect as $kategoriOption)
+                                                    <option value="{{ $kategoriOption['id'] }}"
                                                         class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
-                                                        {{ $item }}
+                                                        {{ $kategoriOption['nama_kategori'] }} ({{$kategoriOption['jenis']}})
                                                     </option>
                                                 @endforeach
                                             </select>

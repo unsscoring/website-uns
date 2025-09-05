@@ -219,6 +219,9 @@ class ManajerKejuaraanAtlet extends Component
     public function golonganSelected()
     {
         $kejuaraanKategoris = $this->kejuaraan->kejuaraanKategoris->pluck('ref_kategoris_id')->toArray();
-        $this->kategoriSelect = RefKategori::whereIn('id', $kejuaraanKategoris)->where('golongans_id', $this->golongan)->pluck('nama_kategori', 'id')->toArray();
+        $this->kategoriSelect = RefKategori::whereIn('id', $kejuaraanKategoris)
+            ->where('golongans_id', $this->golongan)
+            ->get(['id', 'nama_kategori', 'jenis'])
+            ->toArray();
     }
 }

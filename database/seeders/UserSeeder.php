@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'super admin',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('Juaraumum1'),
             ]
         );
         $superAdmin = User::where('email', 'superadmin@gmail.com')->first();
