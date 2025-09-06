@@ -55,8 +55,13 @@
                 <a href="#beranda" class="hover:text-gray-200">Beranda</a>
                 <a href="#fitur" class="hover:text-gray-200">Kejuaraan</a>
                 <a href="#daftar" class="hover:text-gray-200">Tentang Kami</a>
-                <a href="#daftar"
+                @guest
+                <a href="{{ route('login') }}" 
                     class="mt-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium inline-block w-max">Masuk</a>
+                @else
+                <a href="{{ route('dashboard') }}" 
+                    class="mt-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium inline-block w-max">Dashboard</a>
+                @endguest
             </div>
         </div>
     </header>

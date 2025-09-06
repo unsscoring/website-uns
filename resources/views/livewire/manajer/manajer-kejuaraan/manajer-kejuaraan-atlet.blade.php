@@ -1,7 +1,7 @@
 <div>
     <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
         <!-- Breadcrumb Start -->
-        <div x-data="{ pageName: `Manajemen atlet - {{$kejuaraan->nama_kejuaraan}}` }">
+        <div x-data="{ pageName: `Manajemen atlet - {{ $kejuaraan->nama_kejuaraan }}` }">
             <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName"></h2>
 
@@ -222,6 +222,20 @@
                 </div>
             </div>
         </div>
+
+        <div class="flex justify-between mt-6">
+            <!-- Tombol Sebelumnya -->
+            <a href="{{ url('/manajer/kejuaraan/'. $kejuaraan->id . '/kontingen') }}"
+                class="px-4 py-2 rounded-lg bg-brand-500 text-white hover:bg-brand-600">
+                Sebelumnya
+            </a>
+
+            <!-- Tombol Selanjutnya -->
+            <a href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/pembayaran') }}"
+                class="px-4 py-2 rounded-lg bg-brand-500 text-white hover:bg-brand-600">
+                Selanjutnya
+            </a>
+        </div>
     </div>
     <div>
         @if ($isModalOpen)
@@ -376,7 +390,8 @@
                                                 @foreach ($kategoriSelect as $kategoriOption)
                                                     <option value="{{ $kategoriOption['id'] }}"
                                                         class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
-                                                        {{ $kategoriOption['nama_kategori'] }} ({{$kategoriOption['jenis']}})
+                                                        {{ $kategoriOption['nama_kategori'] }}
+                                                        ({{ $kategoriOption['jenis'] }})
                                                     </option>
                                                 @endforeach
                                             </select>

@@ -80,4 +80,13 @@ class ManajerKejuaraanKontingen extends Component
             'redirect' => '/manajer/kejuaraan/' . $this->kejuaraan->id . '/atlet',
         ]);
     }
+
+    public function warningKontingen()
+    {
+        $this->dispatch('swal', [
+            'title' => 'Peringatan!',
+            'text' => 'Silakan simpan data kontingen terlebih dahulu.',
+            'icon' => 'warning',
+        ]);
+    }
 }

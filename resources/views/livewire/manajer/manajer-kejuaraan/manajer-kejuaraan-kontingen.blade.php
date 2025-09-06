@@ -1,7 +1,7 @@
 <div>
     <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6">
         <!-- Breadcrumb Start -->
-        <div x-data="{ pageName: `Buat Kontingen - {{$kejuaraan->nama_kejuaraan}}` }">
+        <div x-data="{ pageName: `Buat Kontingen - {{ $kejuaraan->nama_kejuaraan }}` }">
             <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName"></h2>
 
@@ -40,7 +40,7 @@
                             </svg>
                             Kontingen
                         </a>
-                        <a href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/atlet') }}"
+                        <a @if ($kontingen) href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/atlet') }}" @else wire:click="warningKontingen" @endif
                             class="tab-btn inline-flex items-center gap-2 border-b-2 px-2.5 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-gray-500 border-transparent hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                             <svg class="size-5" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@
                             Atlet
                         </a>
 
-                        <a href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/pembayaran') }}"
+                        <a @if ($kontingen) href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/pembayaran') }}"  @else wire:click="warningKontingen" @endif
                             class="tab-btn inline-flex items-center gap-2 border-b-2 px-2.5 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-gray-500 border-transparent hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20"
                                 height="20" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -124,5 +124,26 @@
                 </div>
             </div>
         </div>
+        <div class="flex justify-between mt-6">
+            <!-- Tombol Sebelumnya -->
+            <a href="{{ url('/kejuaraan/'.$kejuaraan->slug) }}"
+                class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">
+                Sebelumnya
+            </a>
+
+            <!-- Tombol Selanjutnya -->
+            @if ($kontingen)
+                <a href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/atlet') }}"
+                    class="px-4 py-2 rounded-lg bg-brand-500 text-white hover:bg-brand-600">
+                    Selanjutnya
+                </a>
+            @else
+                <button wire:click="warningKontingen"
+                    class="px-4 py-2 rounded-lg bg-brand-500 text-white hover:bg-brand-600">
+                    Selanjutnya
+                </button>
+            @endif
+        </div>
+
     </div>
 </div>

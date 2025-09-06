@@ -307,6 +307,21 @@
             </div>
         </div>
         <!-- ====== Form Elements Section End -->
+
+
+        <div class="flex justify-between mt-6">
+            <!-- Tombol Sebelumnya -->
+            <a href="{{ url('/manajer/kejuaraan/' . $kejuaraan->id . '/atlet') }}"
+                class="px-4 py-2 rounded-lg bg-brand-500 text-white hover:bg-brand-600">
+                Sebelumnya
+            </a>
+
+            <!-- Tombol Selanjutnya -->
+            <a href="{{ url('/') }}"
+                class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">
+                Home
+            </a>
+        </div>
     </div>
 
 </div>
