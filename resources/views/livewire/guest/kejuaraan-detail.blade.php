@@ -158,10 +158,10 @@
                                                 </span>
                                             </div>
 
-                                            <button wire:click.prevent="downloadFile({{ $kejuaraanUnduhan->id }})"
+                                            <a href="{{Storage::disk('s3')->temporaryUrl($kejuaraanUnduhan->path_file, now()->addMinutes(5))}}" target="_blank"
                                                 class="text-red-600 text-sm hover:underline">
                                                 Unduh
-                                            </button>
+                                            </a>
                                         </li>
                                     @endforeach
                                 </ul>
