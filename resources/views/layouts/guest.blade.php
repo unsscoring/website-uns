@@ -29,8 +29,8 @@
             <!-- Desktop nav -->
             <nav class="hidden md:flex items-center space-x-6">
                 <a href="{{url('/')}}" class="hover:text-gray-200">Beranda</a>
-                <a href="#fitur" class="hover:text-gray-200">Kejuaraan</a>
-                <a href="#event" class="hover:text-gray-200">Tentang Kami</a>
+                <a href="{{url('/')}}#fitur" class="hover:text-gray-200">Kejuaraan</a>
+                <a href="{{url('/')}}#daftar" class="hover:text-gray-200">Tentang Kami</a>
                 @guest
                     <a href="{{ route('login') }}" class="ml-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:opacity-90">Masuk</a>
                 @else
@@ -52,9 +52,9 @@
         <!-- Mobile nav (hidden by default) -->
         <div id="mobileNav" class="md:hidden hidden bg-white border-t border-red-500">
             <div class="px-6 py-4 flex flex-col space-y-3">
-                <a href="#beranda" class="hover:text-gray-200">Beranda</a>
-                <a href="#fitur" class="hover:text-gray-200">Kejuaraan</a>
-                <a href="#daftar" class="hover:text-gray-200">Tentang Kami</a>
+                <a href="{{url('/')}}" class="hover:text-gray-200">Beranda</a>
+                <a href="{{url('/')}}#fitur" class="hover:text-gray-200">Kejuaraan</a>
+                <a href="{{url('/')}}#daftar" class="hover:text-gray-200">Tentang Kami</a>
                 @guest
                 <a href="{{ route('login') }}" 
                     class="mt-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium inline-block w-max">Masuk</a>
