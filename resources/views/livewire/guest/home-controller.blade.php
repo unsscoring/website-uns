@@ -27,17 +27,20 @@
 
             <div class="mt-10 grid md:grid-cols-3 gap-4 items-stretch">
                 @foreach ($kejuaraans as $kejuaraan)
-                    <a href="{{url('/kejuaraan/'.$kejuaraan->slug)}}">
-                        <div
-                            class="group block bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-[1.01] transition h-full">
-                            <div class="w-full h-96 md:h-[32rem] overflow-hidden">
-                                <img loading="lazy" src="{{ $kejuaraan->poster ? Storage::disk('s3')->temporaryUrl($kejuaraan->poster, \Carbon\Carbon::now()->addMinutes(5)) : null }} "
-                                    alt="Event sepak bola" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 text-left flex flex-col justify-between h-auto">
-                                <div>
-                                    <h4 class="font-semibold text-xl text-red-700">{{ $kejuaraan->nama_kejuaraan }}</h4>
-                                </div>
+                    <a href="{{ url('/kejuaraan/' . $kejuaraan->slug) }}"
+                        class="group flex flex-col bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-[1.01] transition cursor-pointer h-full">
+
+                        <!-- Poster -->
+                        <div class="w-full h-96 md:h-[32rem] overflow-hidden">
+                            <img loading="lazy"
+                                src="{{ $kejuaraan->poster ? Storage::disk('s3')->temporaryUrl($kejuaraan->poster, \Carbon\Carbon::now()->addMinutes(5)) : null }}"
+                                alt="Event sepak bola" class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Konten -->
+                        <div class="p-5 flex flex-col flex-grow">
+                            <div class="flex-grow">
+                                <h4 class="font-semibold text-xl text-red-700">{{ $kejuaraan->nama_kejuaraan }}</h4>
 
                                 <div class="mt-4 flex flex-col gap-2">
                                     <div class="text-sm text-gray-600">
@@ -46,23 +49,31 @@
                                     </div>
                                     <div class="text-sm">
                                         <span
-                                            class="inline-flex bg-red-100 text-red-700 px-4 py-1 rounded-full text-xs font-medium min-w-max">Daftar:
+                                            class="inline-flex bg-red-100 text-red-700 px-4 py-1 rounded-full text-xs font-medium min-w-max">
+                                            Daftar:
                                             {{ \Carbon\Carbon::parse($kejuaraan->pendaftaran_awal)->format('d M Y') }} -
                                             {{ \Carbon\Carbon::parse($kejuaraan->pendaftaran_akhir)->format('d M Y') }}
                                         </span>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Bagian bawah fix -->
+                            <div class="mt-6 flex justify-end">
+                                <span class="text-red-600 font-semibold group-hover:underline">
+                                    Lihat Detail →
+                                </span>
+                            </div>
                         </div>
                     </a>
                 @endforeach
             </div>
 
-            <div class="mt-8 flex justify-center">
+            {{-- <div class="mt-8 flex justify-center">
                 <button id="showMore"
                     class="bg-white border border-red-600 text-red-600 px-6 py-2 rounded-md hover:bg-red-50">Tampilkan
                     Lebih Banyak Kejuaraan</button>
-            </div>
+            </div> --}}
 
         </div>
     </section>

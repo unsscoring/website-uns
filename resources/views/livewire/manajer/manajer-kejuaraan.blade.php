@@ -2,34 +2,40 @@
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
         @foreach ($kejuaraans as $kejuaraan)
             <a href="{{ url('/kejuaraan/' . $kejuaraan->slug) }}"
-                class="group block bg-white rounded-xl shadow-sm hover:shadow-md overflow-hidden transform hover:scale-[1.01] transition duration-200 ease-in-out h-full">
+                class="group flex flex-col bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-[1.01] transition cursor-pointer h-full">
 
-                <!-- Poster square (crop, bukan stretch) -->
-                <div class="aspect-square w-full overflow-hidden bg-gray-100">
+                <!-- Poster -->
+                <div class="w-full h-96 md:h-[32rem] overflow-hidden">
                     <img loading="lazy"
-                        src="{{ $kejuaraan->poster ? Storage::disk('s3')->temporaryUrl($kejuaraan->poster, now()->addMinutes(5)) : asset('images/placeholder.png') }}"
-                        alt="{{ $kejuaraan->nama_kejuaraan }}"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-300 ease-in-out">
+                        src="{{ $kejuaraan->poster ? Storage::disk('s3')->temporaryUrl($kejuaraan->poster, \Carbon\Carbon::now()->addMinutes(5)) : null }}"
+                        alt="Event sepak bola" class="w-full h-full object-cover">
                 </div>
 
-                <!-- Content -->
-                <div class="p-5 flex flex-col justify-between h-auto">
-                    <div>
-                        <h3 class="font-semibold text-lg text-gray-900 group-hover:text-red-700 transition">
-                            {{ $kejuaraan->nama_kejuaraan }}
-                        </h3>
+                <!-- Konten -->
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex-grow">
+                        <h4 class="font-semibold text-xl text-red-700">{{ $kejuaraan->nama_kejuaraan }}</h4>
+
+                        <div class="mt-4 flex flex-col gap-2">
+                            <div class="text-sm text-gray-600">
+                                <span class="font-medium text-gray-800">Penyelenggara:</span>
+                                {{ $kejuaraan->penyelenggara }}
+                            </div>
+                            <div class="text-sm">
+                                <span
+                                    class="inline-flex bg-red-100 text-red-700 px-4 py-1 rounded-full text-xs font-medium min-w-max">
+                                    Daftar:
+                                    {{ \Carbon\Carbon::parse($kejuaraan->pendaftaran_awal)->format('d M Y') }} -
+                                    {{ \Carbon\Carbon::parse($kejuaraan->pendaftaran_akhir)->format('d M Y') }}
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mt-4 flex flex-col gap-2">
-                        <p class="text-sm text-gray-600">
-                            <span class="font-medium text-gray-800">Penyelenggara:</span>
-                            {{ $kejuaraan->penyelenggara }}
-                        </p>
-                        <span
-                            class="inline-flex items-center justify-center gap-1 rounded-full bg-error-50 py-0.5 pl-2.5 pr-2 text-sm font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">
-                            Pendaftaran:
-                            {{ \Carbon\Carbon::parse($kejuaraan->pendaftaran_awal)->format('d M Y') }} –
-                            {{ \Carbon\Carbon::parse($kejuaraan->pendaftaran_akhir)->format('d M Y') }}
+                    <!-- Bagian bawah fix -->
+                    <div class="mt-6 flex justify-end">
+                        <span class="text-red-600 font-semibold group-hover:underline">
+                            Lihat Detail →
                         </span>
                     </div>
                 </div>
