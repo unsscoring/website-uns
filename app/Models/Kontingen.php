@@ -12,4 +12,12 @@ class Kontingen extends Model
     {
         return $this->hasMany(Atlet::class, 'kontingens_id', 'id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+    public function kejuaraan()
+    {
+        return $this->belongsTo(Kejuaraan::class, 'kejuaraans_id', 'id');
+    }
 }
