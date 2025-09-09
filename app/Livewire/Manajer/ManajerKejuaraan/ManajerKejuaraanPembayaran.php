@@ -31,45 +31,49 @@ class ManajerKejuaraanPembayaran extends Component
         $this->tanggal = $this->kontingen->tanggal_pembayaran ? Carbon::parse($this->kontingen->tanggal_pembayaran)->format('Y-m-d') : Carbon::now()->format('Y-m-d');
         // $this->statusPembayaran = $this->pembayaran ? $this->pembayaran->status : 0;
         $expiration = Carbon::now()->addMinutes(5); // URL berlaku selama 5 menit
-        $this->fileUrl =$this->kontingen->path_pembayaran ? Storage::disk('s3')->temporaryUrl($this->kontingen->path_pembayaran, $expiration) : null;
-        $tanding = $this->kontingen->atlets->filter(function ($atlet) {
-            return strtolower($atlet->refKategori->cabang ?? '') === 'tanding';
-        })->count();
-        $tunggal = $this->kontingen->atlets->filter(function ($atlet) {
-            return stripos($atlet->refKategori->nama_kategori ?? '', 'tunggal') !== false;
-        })->count();
+        $this->fileUrl = $this->kontingen->path_pembayaran ? Storage::disk('s3')->temporaryUrl($this->kontingen->path_pembayaran, $expiration) : null;
+        $kategoriCounts = $this->kontingen->atlets->groupBy(function ($atlet) {
+            return strtolower($atlet->refKategori->nama_kategori ?? '');
+        })->map->count();
 
-        $ganda = $this->kontingen->atlets->filter(function ($atlet) {
-            return stripos($atlet->refKategori->nama_kategori ?? '', 'ganda') !== false;
-        })->count();
+        $this->tagihan_details = [];
 
-        $beregu = $this->kontingen->atlets->filter(function ($atlet) {
-            return stripos($atlet->refKategori->nama_kategori ?? '', 'beregu') !== false;
-        })->count();
+        foreach ($this->kejuaraan->kejuaraanKategoris as $kategori) {
+            $nama = strtolower($kategori->refKategori->nama_kategori);
+            $jumlah = $kategoriCounts[$nama] ?? 0;
 
-        $solokreatif = $this->kontingen->atlets->filter(function ($atlet) {
-            return stripos($atlet->refKategori->nama_kategori ?? '', 'solo kreatif') !== false;
-        })->count();
+            // logika pembagian jumlah sesuai jenis kategori
+            if (stripos($nama, 'ganda') !== false) {
+                $jumlah = (int) ceil($jumlah / 2);
+            } elseif (stripos($nama, 'beregu') !== false) {
+                $jumlah = (int) ceil($jumlah / 3);
+            }
 
-        $this->tagihan_details = array_filter([
-            'tanding' => ['jumlah' => $tanding, 'harga' => 300000],
-            'tunggal' => ['jumlah' => $tunggal, 'harga' => 300000],
-            'ganda' => ['jumlah' => (int) ceil($ganda / 2), 'harga' => 500000],
-            'beregu' => ['jumlah' => ceil($beregu / 3), 'harga' => 600000],
-            'solo kreatif' => ['jumlah' => ceil($solokreatif / 1), 'harga' => 300000],
-        ], function ($item) {
-            return $item['jumlah'] > 0;
-        });
+            if ($jumlah > 0) {
+                $this->tagihan_details[$nama] = [
+                    'jumlah' => $jumlah,
+                    'harga' => $kategori->swp, // ambil harga dari kejuaraanKategori
+                ];
+            }
+        }
+
         $this->jumlah_tagihan = array_reduce($this->tagihan_details, function ($carry, $item) {
             return $carry + ($item['jumlah'] * $item['harga']);
         }, 0);
+        // Tambahkan SWO hanya sekali jika ada
+        if ($this->kejuaraan->swo && $this->kejuaraan->swo > 0) {
+            $this->tagihan_details['swo'] = [
+                'jumlah' => 1,
+                'harga'  => $this->kejuaraan->swo,
+            ];
+            $this->jumlah_tagihan += $this->kejuaraan->swo;
+        }
     }
     public function render()
     {
         return view('livewire.manajer.manajer-kejuaraan.manajer-kejuaraan-pembayaran')->layoutData(['manajerKejuaraan' => 'active']);
     }
 
-    
     public function simpanPembayaran()
     {
         if ($this->isSubmitting) return;
@@ -109,7 +113,7 @@ class ManajerKejuaraanPembayaran extends Component
                 ]);
             }
         }
-        
+
         if ($this->bukti_pembayaran) {
             $ekstensi = $this->bukti_pembayaran->getClientOriginalExtension();
             $file_path = 'kontingen/bukti_bayar';

@@ -25,6 +25,6 @@ class SuperadminVerifikasiKejuaraan extends Component
     }
     public function render()
     {
-        return view('livewire.superadmin.superadmin-verifikasi.superadmin-verifikasi-kejuaraan');
+        return view('livewire.superadmin.superadmin-verifikasi.superadmin-verifikasi-kejuaraan')->layoutData(['superadminVerifikasi' => 'active']);
     }
 }
