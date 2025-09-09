@@ -8,6 +8,10 @@ class Kejuaraan extends Model
 {
     protected $guarded = [];
 
+    public function kontingens()
+    {
+        return $this->hasMany(Kontingen::class, 'kejuaraans_id', 'id');
+    }
     public function kejuaraanUnduhans()
     {
         return $this->hasMany(KejuaraanUnduhan::class, 'kejuaraans_id', 'id');

@@ -15,6 +15,10 @@ use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateC
 use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateInformasi;
 use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateKategori;
 use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateLampiran;
+use App\Livewire\Superadmin\SuperadminVerifikasi;
+use App\Livewire\Superadmin\SuperadminVerifikasi\SuperadminVerifikasiAtlet;
+use App\Livewire\Superadmin\SuperadminVerifikasi\SuperadminVerifikasiKejuaraan;
+use App\Livewire\Superadmin\SuperadminVerifikasi\SuperadminVerifikasiKontingen;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('welcome');
@@ -34,6 +38,11 @@ Route::middleware(['role:superadmin'])->group(function () {
     Route::get('/superadmin/kejuaraan-update/{kejuaraan}/contact', SuperadminKejuaraanUpdateContact::class)->name('superadmin.kejuaraan-update.contact');
     Route::get('/superadmin/kejuaraan-update/{kejuaraan}/lampiran', SuperadminKejuaraanUpdateLampiran::class)->name('superadmin.kejuaraan-update.lampiran');
     Route::get('/superadmin/kejuaraan-update/{kejuaraan}/kategori', SuperadminKejuaraanUpdateKategori::class)->name('superadmin.kejuaraan-update.kategori');
+    Route::get('/superadmin/verifikasi', SuperadminVerifikasi::class)->name('superadmin.verifikasi');
+    Route::get('/superadmin/verifikasi/{kejuaraan}', SuperadminVerifikasiKejuaraan::class)->name('superadmin.verifikasi.kejuaraan');
+    Route::get('/superadmin/verifikasi/{kontingen}/kontingen', SuperadminVerifikasiKontingen::class)->name('manajer.kejuaraan.kontingen');
+    Route::get('/superadmin/verifikasi/{kontingen}/atlet', SuperadminVerifikasiAtlet::class)->name('manajer.kejuaraan.atlet');
+    Route::get('/superadmin/verifikasi/{kontingen}/pembayaran', SuperadminVerifikasiKontingen::class)->name('manajer.kejuaraan.pembayaran');
 });
 Route::middleware([
     'auth:sanctum',

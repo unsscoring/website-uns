@@ -166,8 +166,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                 <!-- Menu Item Dashboard -->
                                 <li>
                                     <a href="{{ url('/superadmin/dashboard') }}" @click="selected = (selected === 'Calendar' ? '':'Calendar')"
-                                        class="menu-item group menu-item-{{ $superadminDashboard ?? 'inactive' }}">
-                                        <svg class="menu-item-icon-{{ $superadminDashboard ?? 'inactive' }}"
+                                        class="menu-item group menu-item-{{ $superadminDashboard ?? ( $superadminVerifikasi ?? 'inactive') }}">
+                                        <svg class="menu-item-icon-{{ $superadminDashboard ?? ( $superadminVerifikasi ?? 'inactive') }}"
                                             width="24" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -214,6 +214,20 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                                     class="menu-dropdown-item group"
                                                     :class="'menu-dropdown-item-{{ $superadminKejuaraan ?? 'inactive' }}'">
                                                     Kejuaraan
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Dropdown Menu Start -->
+                                    <div class="overflow-hidden transform translate"
+                                        :class="(selected === 'Dashboard') ? 'block' : 'hidden'">
+                                        <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
+                                            class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
+                                            <li>
+                                                <a href="{{ url('/superadmin/verifikasi') }}"
+                                                    class="menu-dropdown-item group"
+                                                    :class="'menu-dropdown-item-{{ $superadminVerifikasi ?? 'inactive' }}'">
+                                                    Verifikasi
                                                 </a>
                                             </li>
                                         </ul>
