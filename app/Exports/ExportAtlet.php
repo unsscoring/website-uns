@@ -37,8 +37,19 @@ class ExportAtlet implements FromView, ShouldAutoSize, WithStyles, WithColumnWid
     }
     public function view(): View
     {
-        $atlets = Atlet::with(['refKategori', 'kontingen', 'refStatus'])
+        $id = $this->kejuaraan_id;
+        $atlets = Atlet::with([
+            'refKategori',
+            'refStatus',
+            'kontingen' => function ($q) use ($id) {
+                $q->where('kejuaraans_id', $id);
+            }
+        ])
+            ->whereHas('kontingen', function ($q) use ($id) {
+                $q->where('kejuaraans_id', $id);
+            })
             ->get();
+
         $this->data = $atlets->count();
         return view('excel.export-atlet', [
             'atlets' => $atlets,
