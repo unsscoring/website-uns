@@ -20,4 +20,8 @@ class Kontingen extends Model
     {
         return $this->belongsTo(Kejuaraan::class, 'kejuaraans_id', 'id');
     }
+    public function statusPembayaran()
+    {
+        return $this->hasOne(RefStatus::class, 'id', 'status_pembayaran');
+    }
 }

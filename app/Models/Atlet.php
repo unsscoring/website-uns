@@ -17,4 +17,9 @@ class Atlet extends Model
     {
         return $this->hasOne(RefStatus::class, 'id', 'status');
     }
+
+    public function kontingen()
+    {
+        return $this->belongsTo(Kontingen::class, 'kontingens_id', 'id');
+    }
 }

@@ -2,10 +2,14 @@
 
 namespace App\Livewire\Superadmin\SuperadminVerifikasi;
 
+use App\Exports\ExportAtlet;
+use App\Exports\ExportKontingen;
 use App\Models\Kejuaraan;
 use App\Models\Kontingen;
+use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SuperadminVerifikasiKejuaraan extends Component
 {
@@ -26,5 +30,15 @@ class SuperadminVerifikasiKejuaraan extends Component
     public function render()
     {
         return view('livewire.superadmin.superadmin-verifikasi.superadmin-verifikasi-kejuaraan')->layoutData(['superadminVerifikasi' => 'active']);
+    }
+
+    public function exportKontingen()
+    {
+        return Excel::download(new ExportKontingen($this->kejuaraan->id), 'Rekap Kontingen_'.$this->kejuaraan->nama_kejuaraan.'_'.Carbon::now()->toDateString().'.xlsx');
+    }
+
+    public function exportAtlet()
+    {
+        return Excel::download(new ExportAtlet($this->kejuaraan->id), 'Rekap Atlet_'.$this->kejuaraan->nama_kejuaraan.'_'.Carbon::now()->toDateString().'.xlsx');
     }
 }

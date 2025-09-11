@@ -9,7 +9,7 @@
                     <ol class="flex items-center gap-1.5">
                         <li>
                             <a class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400"
-                                href="index.html">
+                                href="{{ url('/') }}">
                                 Home
                                 <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,9 +30,27 @@
                 <div
                     class="px-5 py-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <h3 class="text-base font-medium text-gray-800 dark:text-white/90">
-                        Daftar Kejuaraan
+                        Daftar Atlet
                     </h3>
                     <div class="flex flex-col sm:flex-row gap-3">
+                        <button wire:click="exportKontingen"
+                            class="inline-flex items-center justify-center gap-2 rounded-full border border-success-300 bg-white px-4 py-2 text-sm font-medium text-success-700 shadow-sm hover:bg-success-100 hover:text-success-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
+                            <svg class="fill-current" width="18" height="18" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill="currentColor"
+                                    d="M4 2h10l6 6v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm10 1.5V9h5.5L14 3.5zM7.293 13.707L9 11.414l1.707 2.293h1.387L10 11.071l2.5-3.071h-1.5L9 10.086L7.5 8h-1.5l2.5 3.071l-2.5 3.071h1.293z" />
+                            </svg>
+                            Rekap Kontingen
+                        </button>
+                        <button wire:click="exportAtlet"
+                            class="inline-flex items-center justify-center gap-2 rounded-full border border-success-300 bg-white px-4 py-2 text-sm font-medium text-success-700 shadow-sm hover:bg-success-100 hover:text-success-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
+                            <svg class="fill-current" width="18" height="18" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill="currentColor"
+                                    d="M4 2h10l6 6v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm10 1.5V9h5.5L14 3.5zM7.293 13.707L9 11.414l1.707 2.293h1.387L10 11.071l2.5-3.071h-1.5L9 10.086L7.5 8h-1.5l2.5 3.071l-2.5 3.071h1.293z" />
+                            </svg>
+                            Rekap Atlet
+                        </button>
                         <a href="{{ url('/superadmin/kejuaraan-create') }}"
                             class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-100 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
                             <svg class="fill-current" width="18" height="18" viewBox="0 0 24 24"
@@ -148,7 +166,7 @@
                                             </td>
                                             <td class="px-5 py-4 sm:px-6">
                                                 <div class="flex items-center">
-                                                    <a href="{{ url('/superadmin/verifikasi/' . $kontingen->id.'/kontingen') }}"
+                                                    <a href="{{ url('/superadmin/verifikasi/' . $kontingen->id . '/kontingen') }}"
                                                         class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-100 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
                                                         <svg class="fill-current" width="18" height="18"
                                                             viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
