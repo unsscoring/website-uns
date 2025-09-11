@@ -9,6 +9,7 @@ use App\Models\RefGolongan;
 use App\Models\RefKategori;
 use App\Models\RefStatus;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -29,7 +30,14 @@ class SuperadminVerifikasiAtlet extends Component
         $this->kontingen = $kontingen;
         $this->kejuaraan = $kontingen->kejuaraan;
         $this->atlets = $this->kontingen->atlets;
-        $this->golonganSelect = RefGolongan::pluck('nama', 'id')->toArray();
+        $this->golonganSelect = DB::table('kejuaraan_kategoris')
+            ->join('ref_kategoris', 'kejuaraan_kategoris.ref_kategoris_id', '=', 'ref_kategoris.id')
+            ->join('ref_golongans', 'ref_kategoris.golongans_id', '=', 'ref_golongans.id')
+            ->where('kejuaraan_kategoris.kejuaraans_id', $this->kejuaraan->id)
+            ->select('ref_golongans.id', 'ref_golongans.nama')
+            ->distinct()
+            ->pluck('ref_golongans.nama', 'ref_golongans.id')
+            ->toArray();
         $this->statusSelect = RefStatus::pluck('nama', 'id')->toArray();
     }
     public function render()
