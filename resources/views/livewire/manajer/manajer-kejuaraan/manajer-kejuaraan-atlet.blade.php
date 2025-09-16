@@ -392,6 +392,7 @@
                                                         class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
                                                         {{ $kategoriOption['nama_kategori'] }}
                                                         ({{ $kategoriOption['jenis'] }})
+                                                        ({{ $kategoriOption['ref_regulasi']['nama'] == 'IPSI 2022' ? 'IPSI' : $kategoriOption['ref_regulasi']['nama']}})
                                                     </option>
                                                 @endforeach
                                             </select>
