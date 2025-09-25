@@ -204,16 +204,16 @@
                         <h3 class="text-base font-medium text-gray-800 dark:text-white/90">
                             Pembayaran :
                         </h3>
-                        @if ($pembayaran)
+                        @if ($kontingen->statusPembayaran)
                             <span
                                 class="
             inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold
-            @if ($pembayaran->refStatusUmum->nama == 'terverifikasi') bg-success-50 text-success-700 dark:bg-success-500/15 dark:text-success-500 
-            @elseif($pembayaran->refStatusUmum->nama === 'menunggu verifikasi') bg-warning-50 text-warning-700 dark:bg-warning-500/15 dark:text-warning-400
-            @elseif($pembayaran->refStatusUmum->nama === 'perbaikan') bg-error-50 text-error-700 dark:bg-error-500/15 dark:text-error-500 
+            @if ($kontingen->statusPembayaran->nama == 'terverifikasi') bg-success-50 text-success-700 dark:bg-success-500/15 dark:text-success-500 
+            @elseif($kontingen->statusPembayaran->nama === 'menunggu verifikasi') bg-warning-50 text-warning-700 dark:bg-warning-500/15 dark:text-warning-400
+            @elseif($kontingen->statusPembayaran->nama === 'perbaikan') bg-error-50 text-error-700 dark:bg-error-500/15 dark:text-error-500 
             @else bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-white @endif
         ">
-                                {{ ucwords($pembayaran->refStatusUmum->nama) }}
+                                {{ ucwords($kontingen->statusPembayaran->nama) }}
                             </span>
                         @endif
                     </div>
