@@ -160,7 +160,7 @@
             @elseif($kontingen->statusPembayaran?->nama === 'perbaikan') bg-error-50 text-error-700 dark:bg-error-500/15 dark:text-error-500 
             @else bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-white @endif
         ">
-                                                        {{ ucwords($kontingen->statusPembayaran?->nama ? $kontingen->pembayaran->refStatusUmum->nama : 'Belum') }}
+                                                        {{ ucwords($kontingen->statusPembayaran?->nama ?? 'Belum') }}
                                                     </span>
                                                 </div>
                                             </td>
