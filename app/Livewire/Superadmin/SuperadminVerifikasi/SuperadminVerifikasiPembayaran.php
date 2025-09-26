@@ -82,7 +82,7 @@ class SuperadminVerifikasiPembayaran extends Component
                 'jumlah_bayar' => 'required|numeric|min:0|',
                 'tanggal' => 'required|date',
             ]);
-            if ($this->pembayaran == null) {
+            if ($this->kontingen->statusPembayaran == null) {
                 $this->validate([
                     'bukti_pembayaran' => 'required|image|max:1024', // Maksimal 1MB
                 ]);
@@ -101,7 +101,7 @@ class SuperadminVerifikasiPembayaran extends Component
                 'jumlah_bayar' => 'required|numeric|min:0|',
                 'tanggal' => 'required|date',
             ]);
-            if ($this->pembayaran == null) {
+            if ($this->kontingen->statusPembayaran == null) {
                 $this->validate([
                     'bukti_pembayaran' => 'required|image|max:1024', // Maksimal 1MB
                 ]);

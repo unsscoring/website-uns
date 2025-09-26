@@ -84,7 +84,7 @@ class ManajerKejuaraanPembayaran extends Component
                 'jumlah_bayar' => 'required|numeric|min:0|',
                 'tanggal' => 'required|date',
             ]);
-            if ($this->pembayaran == null) {
+            if ($this->kontingen->statusPembayaran == null) {
                 $this->validate([
                     'bukti_pembayaran' => 'required|image|max:1024', // Maksimal 1MB
                 ]);
@@ -103,7 +103,7 @@ class ManajerKejuaraanPembayaran extends Component
                 'jumlah_bayar' => 'required|numeric|min:0|',
                 'tanggal' => 'required|date',
             ]);
-            if ($this->pembayaran == null) {
+            if ($this->kontingen->statusPembayaran == null) {
                 $this->validate([
                     'bukti_pembayaran' => 'required|image|max:1024', // Maksimal 1MB
                 ]);
@@ -122,7 +122,7 @@ class ManajerKejuaraanPembayaran extends Component
             $buktiPath = $file_path . '/' . $file_name;
         }
 
-        if ($this->pembayaran) {
+        if ($this->kontingen->statusPembayaran) {
             $this->kontingen->update([
                 'total_pembayaran' => $this->jumlah_bayar,
                 'tanggal_pembayaran' => $this->tanggal,
@@ -133,7 +133,8 @@ class ManajerKejuaraanPembayaran extends Component
         $this->kontingen->update([
             'total_pembayaran' => $this->jumlah_bayar,
             'tanggal_pembayaran' => $this->tanggal,
-            'status' => 1, // Status terverifikasi
+            'status_pembayaran' => 1, 
+            'status' => 1, 
             'path_pembayaran' => $buktiPath,
         ]);
 
