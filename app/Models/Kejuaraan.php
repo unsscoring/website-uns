@@ -24,5 +24,10 @@ class Kejuaraan extends Model
     {
         return $this->hasMany(KejuaraanKategori::class, 'kejuaraans_id', 'id');
     }
-    
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_kejuaraans', 'kejuaraan_id', 'user_id')
+            ->withTimestamps(); // opsional
+    }
 }

@@ -32,7 +32,7 @@ class User extends Authenticatable
         'email',
         'password',
         'gauth_id',
-        'gauth_type', 
+        'gauth_type',
     ];
 
     /**
@@ -72,5 +72,11 @@ class User extends Authenticatable
     public function kontingens()
     {
         return $this->hasMany(Kontingen::class, 'users_id', 'id');
+    }
+
+    public function kejuaraans()
+    {
+        return $this->belongsToMany(Kejuaraan::class, 'user_kejuaraans', 'user_id', 'kejuaraan_id')
+            ->withTimestamps(); // opsional
     }
 }
