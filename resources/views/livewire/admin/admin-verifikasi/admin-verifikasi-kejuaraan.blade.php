@@ -51,7 +51,7 @@
                             </svg>
                             Rekap Atlet
                         </button>
-                        <a href="{{ url('/superadmin/kejuaraan-create') }}"
+                        <a href="{{ url('/admin/kejuaraan-create') }}"
                             class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-100 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
                             <svg class="fill-current" width="18" height="18" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +166,7 @@
                                             </td>
                                             <td class="px-5 py-4 sm:px-6">
                                                 <div class="flex items-center">
-                                                    <a href="{{ url('/superadmin/verifikasi/' . $kontingen->id . '/kontingen') }}"
+                                                    <a href="{{ url('/admin/verifikasi/' . $kontingen->id . '/kontingen') }}"
                                                         class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-100 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
                                                         <svg class="fill-current" width="18" height="18"
                                                             viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">

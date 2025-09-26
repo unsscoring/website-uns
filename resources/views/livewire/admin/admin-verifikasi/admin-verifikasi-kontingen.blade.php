@@ -29,7 +29,7 @@
                 <div class="border-b border-gray-200 dark:border-gray-800">
                     <nav
                         class="-mb-px flex space-x-2 overflow-x-auto [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-200 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600 dark:[&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:h-1.5">
-                        <a href="{{ url('/superadmin/verifikasi/' . $kontingen->id . '/kontingen') }}"
+                        <a href="{{ url('/admin/verifikasi/' . $kontingen->id . '/kontingen') }}"
                             style="border-bottom: 2px solid #1D4ED8; color: #1D4ED8;"
                             class="tab-btn inline-flex items-center gap-2 border-b-2 px-2.5 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-brand-500 border-brand-500 dark:text-brand-400 dark:border-brand-400">
                             <svg class="size-5" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -40,7 +40,7 @@
                             </svg>
                             Kontingen
                         </a>
-                        <a href="{{ url('/superadmin/verifikasi/' . $kontingen->id . '/atlet') }}"
+                        <a href="{{ url('/admin/verifikasi/' . $kontingen->id . '/atlet') }}"
                             class="tab-btn inline-flex items-center gap-2 border-b-2 px-2.5 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-gray-500 border-transparent hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                             <svg class="size-5" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@
 
                             Atlet
                         </a>
-                        <a href="{{ url('/superadmin/verifikasi/' . $kontingen->id . '/pembayaran') }}"
+                        <a href="{{ url('/admin/verifikasi/' . $kontingen->id . '/pembayaran') }}"
                             class="tab-btn inline-flex items-center gap-2 border-b-2 px-2.5 py-2 text-sm font-medium transition-colors duration-200 ease-in-out bg-transparent text-gray-500 border-transparent hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20"
                                 height="20" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -157,13 +157,13 @@
         </div>
         <div class="flex justify-between mt-6">
             <!-- Tombol Sebelumnya -->
-            <a href="{{ url('/superadmin/verifikasi/' . $kejuaraan->id) }}"
+            <a href="{{ url('/admin/verifikasi/' . $kejuaraan->id) }}"
                 class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300">
                 Sebelumnya
             </a>
 
             <!-- Tombol Selanjutnya -->
-            <a href="{{ url('/superadmin/verifikasi/' . $kontingen->id . '/atlet') }}"
+            <a href="{{ url('/admin/verifikasi/' . $kontingen->id . '/atlet') }}"
                 class="px-4 py-2 rounded-lg bg-brand-500 text-white hover:bg-brand-600">
                 Selanjutnya
             </a>
