@@ -47,7 +47,7 @@ class ExportAtlet implements FromView, ShouldAutoSize, WithStyles, WithColumnWid
         ])
             ->whereHas('kontingen', function ($q) use ($id) {
                 $q->where('kejuaraans_id', $id);
-            })
+            })->orderBy('kontingens_id', 'ASC')
             ->get();
 
         $this->data = $atlets->count();
