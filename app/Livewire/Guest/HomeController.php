@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Guest;
 
+use App\Models\Atlet;
 use App\Models\Kejuaraan;
 use App\Models\Kontingen;
 use App\Models\User;
@@ -19,7 +20,7 @@ class HomeController extends Component
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $this->userCount = User::count();
+        $this->userCount = Atlet::count();
         $this->eventCount = $this->kejuaraans->count();
         $this->kontingenCount = Kontingen::count();
     }
