@@ -157,6 +157,7 @@ class SuperadminKejuaraanUpdateInformasi extends Component
                     'open_pendaftaran' => $this->open_pendaftaran,
                     'active' => $this->active,
                     'no_rek' => $this->no_rek,
+                    'swo' => $this->swo,
                     'nama_rek' => $this->nama_rek,
                     'nama_bank' => $this->nama_bank,
                     'link_grup_wa' => $this->link_grup_wa,
