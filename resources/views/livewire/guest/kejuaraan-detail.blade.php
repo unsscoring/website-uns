@@ -231,19 +231,19 @@
                         </div>
                         
                         <div class="p-6 space-y-4">
-                            <div class="flex items-start gap-3">
+                            {{-- <div class="flex items-start gap-3">
                                 <div class="p-2 bg-red-50 rounded-lg">
                                     <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
                                     </svg>
                                 </div>
-                                {{-- <div class="flex-1">
+                                <div class="flex-1">
                                     <p class="text-sm font-medium text-gray-500">Biaya Pendaftaran</p>
                                     <p class="text-lg font-bold text-gray-900">
                                         {{ $kejuaraan->swo ? 'Rp ' . number_format($kejuaraan->swo, 0, ',', '.') : 'Gratis' }}
                                     </p>
-                                </div> --}}
-                            </div>
+                                </div>
+                            </div> --}}
 
                             @if ($kejuaraan->cp1_no && $kejuaraan->cp1_nama)
                             <div class="pt-4 border-t border-gray-100">
