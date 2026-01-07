@@ -158,7 +158,7 @@
                                                                 fill="currentColor" />
                                                         </svg>
                                                     </a>
-                                                    <button wire:click="confirmDeleteAkun({{ $kejuaraan->id }})"
+                                                    <button wire:click="confirmDeleteKejuaraan({{ $kejuaraan->id }})"
                                                         class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-error px-4 py-2 text-sm font-medium text-error-700 shadow-sm hover:bg-gray-100 hover:text-danger-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
                                                         <svg class="fill-current" width="18" height="18"
                                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
