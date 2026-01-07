@@ -69,6 +69,7 @@ class SuperadminKejuaraanUpdateKategori extends Component
     public function resetFields()
     {
         $this->kategorisId = null;
+        $this->kategoriSelected = null;
         $this->bulkKategorisId = [];
         $this->regulasisId = null;
         $this->golongansId = null;
