@@ -4,22 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class OauthController extends Controller
 {
+    /**
+     * Get Socialite driver with custom HTTP client for local environment
+     */
+    private function getSocialiteDriver()
+    {
+        $driver = Socialite::driver('google');
+        
+        // Disable SSL verification for local development only
+        if (app()->environment('local')) {
+            $driver->setHttpClient(new Client(['verify' => false]));
+        }
+        
+        return $driver;
+    }
     
     public function redirectToProvider()
     {
-        return Socialite::driver('google')->redirect();
+        return $this->getSocialiteDriver()->redirect();
     }
     public function handleProviderCallback()
     {
         try {
 
-            $user = Socialite::driver('google')->user();
+            $user = $this->getSocialiteDriver()->user();
 
             $finduser = User::where('gauth_id', $user->id)->first();
 
@@ -44,7 +59,15 @@ class OauthController extends Controller
             }
 
         } catch (Exception $e) {
-            dd($e->getMessage());
+            // Log error untuk debugging
+            \Log::error('Google OAuth Error: ' . $e->getMessage(), [
+                'exception' => $e,
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return redirect('/login')->withErrors([
+                'oauth' => 'Gagal login dengan Google. Silakan coba lagi atau hubungi administrator.'
+            ]);
         }
     }
 }
