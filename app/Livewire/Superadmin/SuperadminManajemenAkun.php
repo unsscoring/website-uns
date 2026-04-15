@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Superadmin;
 
+use App\Models\Kejuaraan;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
@@ -34,14 +35,12 @@ class SuperadminManajemenAkun extends Component
     public $password;
     public $password_confirmation;
     public $selectedRole;
+    public $selectedKejuaraans = [];
 
     // Detail View
     public $selectedUser;
     public $userKontingens = [];
     public $userKejuaraans = [];
-
-    // Available Roles
-    public $roles = [];
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -63,6 +62,11 @@ class SuperadminManajemenAkun extends Component
             $rules['email'] .= '|unique:users,email,' . $this->userId;
         }
 
+        if ($this->selectedRole === 'admin') {
+            $rules['selectedKejuaraans'] = 'required|array|min:1';
+            $rules['selectedKejuaraans.*'] = 'exists:kejuaraans,id';
+        }
+
         return $rules;
     }
 
@@ -75,12 +79,9 @@ class SuperadminManajemenAkun extends Component
         'password.min' => 'Password minimal 8 karakter.',
         'password.confirmed' => 'Konfirmasi password tidak cocok.',
         'selectedRole.required' => 'Role wajib dipilih.',
+        'selectedKejuaraans.required' => 'Pilih minimal satu kejuaraan untuk admin.',
+        'selectedKejuaraans.min' => 'Pilih minimal satu kejuaraan untuk admin.',
     ];
-
-    public function mount()
-    {
-        $this->roles = Role::pluck('name')->toArray();
-    }
 
     public function updatingSearch()
     {
@@ -92,8 +93,16 @@ class SuperadminManajemenAkun extends Component
         $this->resetPage();
     }
 
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
+        $roles = Role::pluck('name')->toArray();
+        $kejuaraans = Kejuaraan::select('id', 'nama_kejuaraan')->orderBy('nama_kejuaraan')->get();
+
         $users = User::query()
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
@@ -106,12 +115,14 @@ class SuperadminManajemenAkun extends Component
                     $q->where('name', $this->filterRole);
                 });
             })
-            ->with('roles') // Eager load untuk optimasi
+            ->with(['roles', 'kejuaraans:kejuaraans.id,kejuaraans.nama_kejuaraan'])
             ->latest()
             ->paginate($this->perPage);
 
         return view('livewire.superadmin.superadmin-manajemen-akun', [
-            'users' => $users
+            'users' => $users,
+            'roles' => $roles,
+            'kejuaraans' => $kejuaraans,
         ])->layoutData(['superadminManajemenAkun' => 'active']);
     }
 
@@ -134,6 +145,11 @@ class SuperadminManajemenAkun extends Component
 
         $user->assignRole($this->selectedRole);
 
+        // Sync kejuaraan assignments for admin role
+        if ($this->selectedRole === 'admin') {
+            $user->kejuaraans()->sync($this->selectedKejuaraans);
+        }
+
         $this->isCreateModalOpen = false;
         $this->resetForm();
 
@@ -148,12 +164,13 @@ class SuperadminManajemenAkun extends Component
     public function openEditModal($id)
     {
         $this->resetForm();
-        $user = User::with('roles')->findOrFail($id);
+        $user = User::with(['roles', 'kejuaraans'])->findOrFail($id);
         
         $this->userId = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
         $this->selectedRole = $user->roles->first()?->name ?? '';
+        $this->selectedKejuaraans = $user->kejuaraans->pluck('id')->toArray();
         
         $this->isEditModalOpen = true;
     }
@@ -170,6 +187,13 @@ class SuperadminManajemenAkun extends Component
 
         // Sync role
         $user->syncRoles([$this->selectedRole]);
+
+        // Sync kejuaraan assignments for admin role, clear for other roles
+        if ($this->selectedRole === 'admin') {
+            $user->kejuaraans()->sync($this->selectedKejuaraans);
+        } else {
+            $user->kejuaraans()->detach();
+        }
 
         $this->isEditModalOpen = false;
         $this->resetForm();
@@ -249,7 +273,7 @@ class SuperadminManajemenAkun extends Component
     // View Detail (Kontingen & Kejuaraan)
     public function openDetailModal($id)
     {
-        $this->selectedUser = User::with(['roles'])->findOrFail($id);
+        $this->selectedUser = User::with(['roles', 'kejuaraans'])->findOrFail($id);
         
         // Lazy load kontingen dengan pagination-like limit untuk performa
         $this->userKontingens = $this->selectedUser->kontingens()
@@ -285,6 +309,7 @@ class SuperadminManajemenAkun extends Component
         $this->password = '';
         $this->password_confirmation = '';
         $this->selectedRole = '';
+        $this->selectedKejuaraans = [];
         $this->resetValidation();
     }
 

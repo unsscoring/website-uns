@@ -149,10 +149,19 @@
                                                         Tidak ada role
                                                     </span>
                                                 @endif
+                                                @if($user->roles->first()?->name === 'admin' && $user->kejuaraans->count() > 0)
+                                                    <div class="mt-1 flex flex-wrap gap-1">
+                                                        @foreach($user->kejuaraans as $kej)
+                                                            <span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-300">
+                                                                {{ $kej->nama_kejuaraan }}
+                                                            </span>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
                                             </td>
                                             <td class="px-5 py-4 sm:px-6">
                                                 <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                                    {{ $user->created_at->format('d M Y') }}
+                                                    {{ $user->created_at?->format('d M Y') ?? '-' }}
                                                 </p>
                                             </td>
                                             <td class="px-5 py-4 sm:px-6">
@@ -244,7 +253,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Role</label>
-                            <select wire:model="selectedRole" 
+                            <select wire:model.live="selectedRole" 
                                 class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white">
                                 <option value="">Pilih Role</option>
                                 @foreach($roles as $role)
@@ -253,6 +262,21 @@
                             </select>
                             @error('selectedRole') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
+                        @if($selectedRole === 'admin')
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kelola Kejuaraan</label>
+                            <div class="max-h-48 overflow-y-auto rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 p-2 space-y-1">
+                                @foreach($kejuaraans as $kej)
+                                    <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
+                                        <input type="checkbox" wire:model="selectedKejuaraans" value="{{ $kej->id }}"
+                                            class="rounded border-gray-300 text-brand-500 focus:ring-brand-500 dark:border-gray-600 dark:bg-gray-700">
+                                        <span class="text-sm text-gray-700 dark:text-gray-300">{{ $kej->nama_kejuaraan }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            @error('selectedKejuaraans') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+                        @endif
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
                             <input type="password" wire:model="password" 
@@ -309,7 +333,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Role</label>
-                            <select wire:model="selectedRole" 
+                            <select wire:model.live="selectedRole" 
                                 class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-brand-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white">
                                 <option value="">Pilih Role</option>
                                 @foreach($roles as $role)
@@ -318,6 +342,21 @@
                             </select>
                             @error('selectedRole') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
+                        @if($selectedRole === 'admin')
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kelola Kejuaraan</label>
+                            <div class="max-h-48 overflow-y-auto rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 p-2 space-y-1">
+                                @foreach($kejuaraans as $kej)
+                                    <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
+                                        <input type="checkbox" wire:model="selectedKejuaraans" value="{{ $kej->id }}"
+                                            class="rounded border-gray-300 text-brand-500 focus:ring-brand-500 dark:border-gray-600 dark:bg-gray-700">
+                                        <span class="text-sm text-gray-700 dark:text-gray-300">{{ $kej->nama_kejuaraan }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            @error('selectedKejuaraans') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+                        @endif
                         <div class="flex justify-end gap-3 pt-4">
                             <button type="button" wire:click="closeModals"
                                 class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
@@ -422,6 +461,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if($selectedUser->roles->first()?->name === 'admin')
+                        <!-- Kejuaraan yang Dikelola (Admin) -->
+                        <div class="mb-6">
+                            <h4 class="text-md font-semibold text-gray-800 dark:text-white mb-3">
+                                Kejuaraan yang Dikelola
+                            </h4>
+                            @if($selectedUser->kejuaraans->count() > 0)
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach($selectedUser->kejuaraans as $kej)
+                                        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-400">
+                                            {{ $kej->nama_kejuaraan }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @else
+                                <p class="text-gray-500 dark:text-gray-400 text-sm">Belum ada kejuaraan yang dikelola.</p>
+                            @endif
+                        </div>
+                        @endif
 
                         <!-- Kontingen Section -->
                         <div class="mb-6">
