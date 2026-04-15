@@ -27,6 +27,7 @@ use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateC
 use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateInformasi;
 use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateKategori;
 use App\Livewire\Superadmin\SuperadminKejuaraanUpdate\SuperadminKejuaraanUpdateLampiran;
+use App\Livewire\Superadmin\SuperadminManajemenAkun;
 use App\Livewire\Superadmin\SuperadminVerifikasi;
 use App\Livewire\Superadmin\SuperadminVerifikasi\SuperadminVerifikasiAtlet;
 use App\Livewire\Superadmin\SuperadminVerifikasi\SuperadminVerifikasiKejuaraan;
@@ -56,6 +57,7 @@ Route::middleware(['role:superadmin'])->group(function () {
     Route::get('/superadmin/verifikasi/{kontingen}/kontingen', SuperadminVerifikasiKontingen::class)->name('manajer.kejuaraan.kontingen');
     Route::get('/superadmin/verifikasi/{kontingen}/atlet', SuperadminVerifikasiAtlet::class)->name('manajer.kejuaraan.atlet');
     Route::get('/superadmin/verifikasi/{kontingen}/pembayaran', SuperadminVerifikasiPembayaran::class)->name('manajer.kejuaraan.pembayaran');
+    Route::get('/superadmin/manajemen-akun', SuperadminManajemenAkun::class)->name('superadmin.manajemen-akun');
 });
 Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/dashboard', AdminDashboard::class)->name('admin.dashboard');
