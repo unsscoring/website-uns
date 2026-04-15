@@ -165,7 +165,7 @@
                                                 </div>
                                             </td>
                                             <td class="px-5 py-4 sm:px-6">
-                                                <div class="flex items-center">
+                                                <div class="flex items-center gap-2">
                                                     <a href="{{ url('/admin/verifikasi/' . $kontingen->id . '/kontingen') }}"
                                                         class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-100 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
                                                         <svg class="fill-current" width="18" height="18"
@@ -175,6 +175,15 @@
                                                                 fill="currentColor" />
                                                         </svg>
                                                     </a>
+                                                    <button
+                                                        wire:click="confirmDeleteKontingen({{ $kontingen->id }})"
+                                                        class="inline-flex items-center gap-2 rounded-full border border-error-300 bg-white px-4 py-2 text-sm font-medium text-error-700 shadow-sm hover:bg-error-50 hover:text-error-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-white/[0.05] dark:hover:text-white transition">
+                                                        <svg class="fill-current" width="18" height="18"
+                                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill="currentColor"
+                                                                d="M9 3a1 1 0 0 0-1 1v1H4.5a1 1 0 1 0 0 2H5v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7h.5a1 1 0 1 0 0-2H16V4a1 1 0 0 0-1-1H9zm1 4h4a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm-2 3a1 1 0 1 1 2 0v7a1 1 0 1 1-2 0V10zm6 0a1 1 0 1 1 2 0v7a1 1 0 1 1-2 0V10z" />
+                                                        </svg>
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>

@@ -9,13 +9,14 @@ use App\Models\Kontingen;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdminVerifikasiKejuaraan extends Component
 {
     #[Layout('layouts.admin')]
-    public $kejuaraan, $kontingens;
+    public $kejuaraan, $kontingens, $kontingenId;
     public function mount(Kejuaraan $kejuaraan)
     {
         if (!Auth::user()->kejuaraans->contains($kejuaraan->id)) {
@@ -44,5 +45,46 @@ class AdminVerifikasiKejuaraan extends Component
     public function exportAtlet()
     {
         return Excel::download(new ExportAtlet($this->kejuaraan->id), 'Rekap Atlet_' . $this->kejuaraan->nama_kejuaraan . '_' . Carbon::now()->toDateString() . '.xlsx');
+    }
+
+    public function confirmDeleteKontingen($id)
+    {
+        $this->kontingenId = $id;
+        $kontingen = Kontingen::find($id);
+
+        $this->dispatch('swal-delete', [
+            'title' => 'Warning',
+            'text' => 'Apakah Kamu Yakin Ingin Menghapus ' . $kontingen->nama_kontingen . '?',
+            'icon' => 'warning',
+            'dispatchOn' => 'deletekontingen',
+        ]);
+    }
+
+    #[On('deletekontingen')]
+    public function deleteKontingen()
+    {
+        $kontingen = Kontingen::find($this->kontingenId);
+
+        if ($kontingen) {
+            $nama = $kontingen->nama_kontingen;
+            $kontingen->atlets()->delete();
+            $kontingen->delete();
+
+            $this->dispatch('swal-notif', [
+                'title' => 'Success',
+                'text' => 'Berhasil menghapus ' . $nama,
+                'icon' => 'success'
+            ]);
+        }
+
+        $this->kontingenId = null;
+        $this->kontingens = Kontingen::where('kejuaraans_id', $this->kejuaraan->id)
+            ->withCount(['atlets as jumlah_atlet'])
+            ->withCount(['atlets as jumlah_terverifikasi' => function ($query) {
+                $query->whereHas('refStatus', function ($q) {
+                    $q->where('nama', 'terverifikasi');
+                });
+            }])
+            ->get();
     }
 }
