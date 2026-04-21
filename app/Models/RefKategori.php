@@ -22,4 +22,9 @@ class RefKategori extends Model
     {
         return $this->hasMany(KejuaraanKategori::class,'ref_kategoris_id', 'id');
     }
+
+    public function atlets()
+    {
+        return $this->hasMany(Atlet::class, 'ref_kategoris_id', 'id');
+    }
 }

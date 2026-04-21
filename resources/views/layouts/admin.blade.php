@@ -294,6 +294,23 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                 </li>
                                 <!-- Menu Item Manajemen Akun End -->
 
+                                <li>
+                                    <a href="{{ url('/superadmin/manajemen-ref-kategori') }}"
+                                        @click="selected = (selected === 'ManajemenRefKategori' ? '':'ManajemenRefKategori')"
+                                        class="menu-item group menu-item-{{ $superadminRefKategori ?? 'inactive' }}">
+                                        <svg class="menu-item-icon-{{ $superadminRefKategori ?? 'inactive' }}" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M9 5.25h6M9 9.75h6M9 14.25h3m-6.75 6h13.5A2.25 2.25 0 0021 18V6A2.25 2.25 0 0018.75 3.75H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"
+                                                stroke="currentColor" />
+                                        </svg>
+
+                                        <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
+                                            Manajemen Ref Kategori
+                                        </span>
+                                    </a>
+                                </li>
+
                             </ul>
                         @endrole
 
