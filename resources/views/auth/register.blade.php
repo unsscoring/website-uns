@@ -6,8 +6,10 @@
 
         <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" id="register-form">
             @csrf
+
+            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
 
             <div>
                 <x-label for="name" value="{{ __('Name') }}" />
@@ -57,4 +59,17 @@
             </div>
         </form>
     </x-authentication-card>
+
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', {action: 'register'}).then(function(token) {
+                    document.getElementById('g-recaptcha-response').value = token;
+                    e.target.submit();
+                });
+            });
+        });
+    </script>
 </x-guest-layout>
