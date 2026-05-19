@@ -1,66 +1,180 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Website UNS — Unggul Nusantara Sport
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Platform manajemen kejuaraan olahraga berbasis web. Dibangun dengan Laravel 11, Livewire 3, dan Tailwind CSS.
 
-## About Laravel
+> **Live:** [https://unggulnusantarasport.com](https://unggulnusantarasport.com)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Daftar Isi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Fitur Utama](#fitur-utama)
+- [Role & Hak Akses](#role--hak-akses)
+- [Tech Stack](#tech-stack)
+- [Struktur Database](#struktur-database)
+- [Instalasi](#instalasi)
+- [Default User](#default-user)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Fitur Utama
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Manajemen Kejuaraan
+Superadmin dan admin dapat membuat, mengedit, dan mengelola kejuaraan olahraga. Setiap kejuaraan memiliki:
+- Informasi dasar (nama, penyelenggara, deskripsi, poster, logo)
+- Periode pendaftaran (tanggal buka & tutup)
+- Detail teknis (TM lokasi/waktu, pelaksanaan lokasi/waktu)
+- Persyaratan data atlet (NIK, NISN, asal sekolah, asal perguruan)
+- Kategori pertandingan (diambil dari referensi golongan & regulasi)
+- Kontak panitia (hingga 3 contact person)
+- Berkas lampiran (file persyaratan)
+- Unduhan (file yang bisa di-download peserta)
+- Link grup WA dan link kejuaraan
+- Data tambahan (custom JSON field)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Pendaftaran Kontingen & Atlet
+Manajer dapat:
+- Mendaftarkan kontingen ke kejuaraan yang sedang dibuka
+- Menambahkan atlet per kontingen, memilih kategori pertandingan
+- Mengunggah berkas kontingen dan atlet
+- Melakukan konfirmasi pembayaran (upload bukti + catatan)
 
-## Laravel Sponsors
+### Verifikasi Multi-Tahap
+Admin dan superadmin melakukan verifikasi 3 tahap per kontingen:
+1. **Verifikasi Kontingen** — cek data dan berkas kontingen
+2. **Verifikasi Atlet** — cek data dan berkas per atlet
+3. **Verifikasi Pembayaran** — cek bukti bayar, validasi, update status
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Setiap tahap memiliki status: `pending`, `terima`, `tolak`.
 
-### Premium Partners
+### Manajemen Kategori Referensi
+Superadmin mengelola referensi kategori pertandingan yang terdiri dari:
+- **Golongan** (misal: Tanding, Seni, Regu)
+- **Regulasi** (misal: Dewasa, Remaja, Anak-anak)
+- **Kategori** (kombinasi golongan + regulasi + bobot)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Google OAuth
+Login menggunakan akun Google. User yang login via Google otomatis mendapat role `manajer`.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Role & Hak Akses
 
-## Code of Conduct
+| Role | Hak Akses |
+|------|-----------|
+| **Superadmin** | Full akses: CRUD kejuaraan, manajemen akun user, manajemen referensi kategori, verifikasi kontingen & atlet & pembayaran |
+| **Admin** | CRUD kejuaraan, verifikasi kontingen & atlet & pembayaran (tidak bisa manajemen akun & ref kategori) |
+| **Manajer** | Mendaftarkan kontingen ke kejuaraan, menambah atlet, upload berkas, konfirmasi pembayaran, lihat dashboard sendiri |
+| **Guest** | Melihat landing page daftar kejuaraan dan halaman detail kejuaraan |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Tech Stack
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Layer | Teknologi |
+|-------|-----------|
+| **Framework** | Laravel 11 |
+| **PHP** | ^8.2 |
+| **Frontend** | Blade + Livewire 3 + Tailwind CSS + Vite |
+| **Auth** | Laravel Jetstream 5.3 (Livewire stack) + Sanctum + Socialite (Google OAuth) |
+| **Permission** | spatie/laravel-permission 6.21 |
+| **Excel** | maatwebsite/excel 3.1 |
+| **Storage** | Flysystem AWS S3 |
+| **Database** | MySQL / SQLite |
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Struktur Database
+
+### Tabel Utama
+
+| Tabel | Deskripsi |
+|-------|-----------|
+| `users` | Pengguna sistem, support 2FA, Google OAuth, profile photo |
+| `kejuaraans` | Data kejuaraan (nama, deskripsi, periode, kontak, poster, logo, dll) |
+| `kontingens` | Kontingen yang didaftarkan manajer ke kejuaraan |
+| `atlets` | Atlet yang didaftarkan dalam kontingen |
+| `manajers` | Data manajer (opsional) |
+| `kejuaraan_kategoris` | Pivot: kategori yang dibuka dalam kejuaraan |
+| `kejuaraan_berkas` | Berkas lampiran persyaratan kejuaraan |
+| `kejuaraan_unduhans` | File unduhan untuk peserta kejuaraan |
+| `kontingen_berkas` | Berkas yang diupload kontingen |
+| `atlet_berkas` | Berkas yang diupload per atlet |
+| `user_kejuaraans` | Pivot: user yang terhubung ke kejuaraan |
+
+### Tabel Referensi
+
+| Tabel | Deskripsi |
+|-------|-----------|
+| `ref_golongans` | Referensi golongan (Tanding, Seni, dll) |
+| `ref_regulasis` | Referensi regulasi (Dewasa, Remaja, dll) |
+| `ref_kategoris` | Referensi kategori lengkap (golongan + regulasi + bobot) |
+| `ref_statuses` | Referensi status (pending/terima/tolak) |
+
+### Diagram Relasi
+
+```
+users ──┬── kontingens ──┬── atlets ── ref_kategoris ──┬── ref_golongans
+        │                │                              └── ref_regulasis
+        │                └── ref_statuses (status, status_pembayaran)
+        │
+        └── user_kejuaraans ── kejuaraans ──┬── kejuaraan_kategoris ── ref_kategoris
+                                             ├── kejuaraan_berkas
+                                             ├── kejuaraan_unduhans
+                                             └── kontingens
+```
+
+---
+
+## Instalasi
+
+```bash
+# Clone
+git clone git@github.com:unsscoring/website-uns.git
+cd website-uns
+
+# Install dependencies
+composer install
+npm install
+
+# Setup environment
+cp .env.example .env
+php artisan key:generate
+
+# Konfigurasi .env (sesuaikan database, Google OAuth, dll)
+# DB_CONNECTION=mysql
+# DB_DATABASE=website_uns
+# GOOGLE_CLIENT_ID=
+# GOOGLE_CLIENT_SECRET=
+# GOOGLE_REDIRECT_URI=
+
+# Migration & seeding
+php artisan migrate
+php artisan db:seed
+
+# Build frontend
+npm run build
+
+# Jalankan server
+php artisan serve
+```
+
+---
+
+## Default User
+
+| Role | Email | Password |
+|------|-------|----------|
+| Superadmin | superadmin@gmail.com | Juaraumum1 |
+| Admin | admin1@gmail.com | password |
+| Admin | admin2@gmail.com | password |
+| Manajer | user1@gmail.com | password |
+| Manajer | user2@gmail.com | password |
+
+> **Catatan:** Semua user dan password di atas adalah default seeder. Ganti segera setelah deployment.
+
+---
+
+## Lisensi
+
+Proyek ini adalah sistem internal **Unggul Nusantara Sport**.
