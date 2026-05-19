@@ -13,7 +13,6 @@ Platform manajemen kejuaraan olahraga berbasis web. Dibangun dengan Laravel 11, 
 - [Tech Stack](#tech-stack)
 - [Struktur Database](#struktur-database)
 - [Instalasi](#instalasi)
-- [Default User](#default-user)
 
 ---
 
@@ -158,20 +157,6 @@ npm run build
 # Jalankan server
 php artisan serve
 ```
-
----
-
-## Default User
-
-| Role | Email | Password |
-|------|-------|----------|
-| Superadmin | superadmin@gmail.com | Juaraumum1 |
-| Admin | admin1@gmail.com | password |
-| Admin | admin2@gmail.com | password |
-| Manajer | user1@gmail.com | password |
-| Manajer | user2@gmail.com | password |
-
-> **Catatan:** Semua user dan password di atas adalah default seeder. Ganti segera setelah deployment.
 
 ---
 
