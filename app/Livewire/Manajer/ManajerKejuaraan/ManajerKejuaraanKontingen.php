@@ -14,6 +14,7 @@ class ManajerKejuaraanKontingen extends Component
     public $kontingen, $user, $name, $no_wa, $nama_kontingen, $alamat_kontingen, $nama_perguruan;
     public function mount(Kejuaraan $kejuaraan)
     {
+        $this->authorize('view', $kejuaraan);
         $this->kejuaraan = $kejuaraan;
         $this->user = auth()->user();
         $kontingen = Kontingen::where('users_id', $this->user->id)

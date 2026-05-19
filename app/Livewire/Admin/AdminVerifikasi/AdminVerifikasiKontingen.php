@@ -15,6 +15,7 @@ class AdminVerifikasiKontingen extends Component
     public $kontingen, $user, $name, $no_wa, $nama_kontingen, $alamat_kontingen, $nama_perguruan, $status;
     public function mount(Kontingen $kontingen)
     {
+        $this->authorize('view', $kontingen);
         $this->kejuaraan = $kontingen->kejuaraan;
         $this->user = auth()->user();
         $this->name = $kontingen?->nama_penanggung_jawab;

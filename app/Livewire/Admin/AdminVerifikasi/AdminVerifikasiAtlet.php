@@ -27,6 +27,7 @@ class AdminVerifikasiAtlet extends Component
     public $statusSelect = [];
     public function mount(Kontingen $kontingen)
     {
+        $this->authorize('view', $kontingen);
         $this->kontingen = $kontingen;
         $this->kejuaraan = $kontingen->kejuaraan;
         $this->atlets = $this->kontingen->atlets;

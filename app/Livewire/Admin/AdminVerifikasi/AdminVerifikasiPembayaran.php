@@ -19,6 +19,7 @@ class AdminVerifikasiPembayaran extends Component
     public $tagihan_details = [], $isSubmitting = false;
     public function mount(Kontingen $kontingen)
     {
+        $this->authorize('view', $kontingen);
         $this->kontingen = $kontingen;
         $this->kejuaraan = $kontingen->kejuaraan;
         $this->user = auth()->user();

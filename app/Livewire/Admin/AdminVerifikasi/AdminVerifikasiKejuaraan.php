@@ -7,7 +7,6 @@ use App\Exports\ExportKontingen;
 use App\Models\Kejuaraan;
 use App\Models\Kontingen;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -19,9 +18,7 @@ class AdminVerifikasiKejuaraan extends Component
     public $kejuaraan, $kontingens, $kontingenId;
     public function mount(Kejuaraan $kejuaraan)
     {
-        if (!Auth::user()->kejuaraans->contains($kejuaraan->id)) {
-            abort(404);
-        }
+        $this->authorize('view', $kejuaraan);
         $this->kejuaraan = $kejuaraan;
         $this->kontingens = Kontingen::where('kejuaraans_id', $kejuaraan->id)
             ->withCount(['atlets as jumlah_atlet'])

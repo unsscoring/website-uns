@@ -27,6 +27,7 @@ class ManajerKejuaraanAtlet extends Component
     public $statusSelect = [];
     public function mount(Kejuaraan $kejuaraan)
     {
+        $this->authorize('view', $kejuaraan);
         $this->kejuaraan = $kejuaraan;
         $this->user = auth()->user();
         $this->kontingen = Kontingen::where('users_id', $this->user->id)

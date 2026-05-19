@@ -18,6 +18,7 @@ class SuperadminVerifikasiKejuaraan extends Component
     public $kejuaraan, $kontingens, $kontingenId;
     public function mount(Kejuaraan $kejuaraan)
     {
+        $this->authorize('view', $kejuaraan);
         $this->kejuaraan = $kejuaraan;
         $this->kontingens = Kontingen::where('kejuaraans_id', $kejuaraan->id)
             ->withCount(['atlets as jumlah_atlet'])
