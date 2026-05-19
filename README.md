@@ -1,8 +1,10 @@
 # Website UNS — Unggul Nusantara Sport
 
-Platform manajemen kejuaraan olahraga berbasis web. Dibangun dengan Laravel 11, Livewire 3, dan Tailwind CSS.
+Platform manajemen kejuaraan olahraga berbasis web milik **Unggul Nusantara Sport** — organisasi penyelenggara kejuaraan pencak silat dan olahraga bela diri di Indonesia. Sistem ini menangani seluruh alur kompetisi secara digital: dari pembuatan event kejuaraan, pendaftaran kontingen dan atlet, unggah berkas persyaratan, hingga verifikasi dan konfirmasi pembayaran.
 
-> **Live:** [https://unggulnusantarasport.com](https://unggulnusantarasport.com)
+Dibangun dengan Laravel 11, Livewire 3, dan Tailwind CSS.
+
+> **Live:** [https://unggulnusantarasport.com](https://unggulnusantarasport.com) — domain resmi yang digunakan untuk production saat ini.
 
 ---
 
