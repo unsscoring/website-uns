@@ -7,6 +7,8 @@ use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class OauthController extends Controller
@@ -49,7 +51,7 @@ class OauthController extends Controller
                     'email' => $user->email,
                     'gauth_id'=> $user->id,
                     'gauth_type'=> 'google',
-                    'password' => encrypt('admin@123')
+                    'password' => Hash::make(Str::random(32))
                 ]);
 
                 $newUser->assignRole('manajer');
